@@ -1,2 +1,3 @@
 # printf-ecole-42
-Because I'm tired of putnbr and putstr
+
+the second project at school 21, the essence of which is to repeat the original print
