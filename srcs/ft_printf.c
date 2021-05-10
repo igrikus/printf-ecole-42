@@ -55,5 +55,4 @@
 int main() {
 	//ft_printf("hello %d\n", 42);
 	printf("%d\n", 50);
-
 }
