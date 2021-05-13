@@ -1,4 +1,4 @@
-NAME    = libftprintf.a
+NAME    = ../libftprintf.a
 
 SOURCE    = ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_strlen.c\
 			ft_memchr.c ft_memcmp.c ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c\

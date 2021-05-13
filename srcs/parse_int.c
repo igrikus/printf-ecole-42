@@ -1,17 +1,32 @@
 #include "../includes/ft_printf.h"
 
-int parse_int(const char *str, int *number)
+char *str_from_arg(int parameters[4], va_list args)
 {
-	int side;
-	int fill_num;
-	char *result;
-	const char *substr;
 
-	substr = ft_substr(str, 0, get_arg_len(str));
-	if (substr == 0)
+}
+
+size_t parse_int(const char *str, va_list args)
+{
+	int counter;
+	int parameters[4];
+	char *result;
+	const char *arg;
+
+	arg = ft_substr(str, 0, get_arg_len(str));
+	if (arg == 0)
 		return (0);
-	side = LEFT;
-	if (arg_contain_minus(substr))
-		side = RIGHT;
-	fill_num = get_fill_num(substr);
+	counter = 0;
+	while (counter < 4)
+		parameters[counter++] = NO;
+	if (arg_contain_zero(arg))
+		parameters[0] = YES;
+	if (arg_contain_minus(arg))
+		parameters[1] = YES;
+	if (arg_contain_dot(arg))
+		parameters[2] = YES;
+	if (arg_contain_asterisk(arg))
+		parameters[3] = YES;
+	result = str_from_arg(parameters, args);
+	args = ft_lstnew(result);
+	return (ft_strlen(result));
 }
