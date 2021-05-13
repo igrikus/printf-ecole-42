@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-char *str_from_arg(int parameters[4], va_list args)
+char *str_from_arg(int parameters[5], va_list args)
 {
 
 }
@@ -8,7 +8,7 @@ char *str_from_arg(int parameters[4], va_list args)
 size_t parse_int(const char *str, va_list args)
 {
 	int counter;
-	int parameters[4];
+	int parameters[5];
 	char *result;
 	const char *arg;
 
@@ -24,9 +24,8 @@ size_t parse_int(const char *str, va_list args)
 		parameters[1] = YES;
 	if (arg_contain_dot(arg))
 		parameters[2] = YES;
-	if (arg_contain_asterisk(arg))
-		parameters[3] = YES;
+
 	result = str_from_arg(parameters, args);
-	args = ft_lstnew(result);
+	list_args = ft_lstnew(result);
 	return (ft_strlen(result));
 }

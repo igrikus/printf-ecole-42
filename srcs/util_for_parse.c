@@ -48,20 +48,3 @@ int arg_contain_asterisk(const char *arg_str)
 	}
 	return (0);
 }
-
-int get_fill_num(const char *arg_str)
-{
-	int fill_num;
-
-	fill_num = 0;
-	while (*arg_str)
-	{
-		if (ft_isdigit(*arg_str))
-		{
-			fill_num = ft_atoi(arg_str);
-			return (fill_num);
-		}
-		arg_str++;
-	}
-	return (fill_num);
-}

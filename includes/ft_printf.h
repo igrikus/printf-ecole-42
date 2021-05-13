@@ -4,6 +4,7 @@
 
 # define NO 0
 # define YES 1
+# define ASTERISK -1
 
 #include "../libft/libft.h"
 #include <stdarg.h>

@@ -31,7 +31,7 @@ bonus:
 	@make OBJ="$(OBJ_BONUS)" all
 
 clean:
-	@rm -f $(OBJ) $(D_FILES)
+	@rm -f $(OBJ) $(OBJ_BONUS) $(D_FILES)
 
 fclean: clean
 	@rm -f $(NAME)
