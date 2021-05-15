@@ -28,7 +28,7 @@ int get_num_before_dot(const char *arg_str)
 
 int get_num_after_dot(const char *arg_str)
 {
-	while (*arg_str != '.')
+	while (arg_str && *arg_str != '.')
 		arg_str++;
 	while (*arg_str)
 	{

@@ -16,6 +16,8 @@ int arg_contain_dot(const char *arg_str);
 int arg_contain_zero(const char *arg_str);
 int arg_contain_asterisk(const char *arg_str);
 int get_fill_num(const char *arg_str);
+int get_num_before_dot(const char *arg_str);
+int get_num_after_dot(const char *arg_str);
 
 t_list *list_args;
 
