@@ -30,7 +30,7 @@ $(NAME): $(OBJ)
 	gcc $(FLAGS) -c $< -o $@ -MD
 
 exec: $(OBJ) $(LIBFT_OBJ)
-	gcc $(OBJ) $(LIBFT_OBJ) -o ft_printf.out
+	gcc -g $(SOURCE) $(LIBFT_SOURCE) -o ft_printf.out
 
 include $(wildcard $(D_FILES))
 
