@@ -10,7 +10,7 @@ char *get_result_line(const char *str, size_t size)
 	int arg_len;
 	char *result;
 
-	result = malloc(size + 1);
+	result = malloc(sizeof(char) * (size + 1));
 	if (result == 0)
 		return (0);
 	while (*str)
@@ -23,7 +23,9 @@ char *get_result_line(const char *str, size_t size)
 		else if (*str == '%')
 		{
 			arg_len = get_arg_len(str);
-			ft_strlcat(result, (const char *) list_args->content, size + 1);
+			size_t i = ft_strlcat(result, (const char *) list_args->content, size + 1);
+			printf("ft_strlcat = %zu\n", i);
+			printf("result - %s\n", result);
 			result += ft_strlen((const char *) list_args->content);
 			list_args = list_args->next;
 			str += arg_len;
@@ -47,7 +49,7 @@ size_t get_arg_size(const char *str, va_list args)
 		if (symbol == 'd' || symbol == 'i')
 			return (parse_int(str, args));
 //		else if (symbol == 's')
-//			return (arse_str(str, args));
+//			return (parse_str(str, args));
 //		else if (symbol == 'c')
 //			return (parse_char(str, args));
 //		else if (symbol == 'p')
@@ -64,34 +66,44 @@ size_t get_arg_size(const char *str, va_list args)
 
 int ft_printf(const char *str, ...)
 {
+	size_t result_len;
 	size_t i;
-	size_t size;
 	va_list args;
 	char *result;
 
+	result = (char*)str;
 	va_start(args, str);
-	size = 0;
-	while (*(str + size))
+	i = 0;
+	while (*str)
 	{
-		i = 0;
-		if (*(str + size) != '%')
+		if (*str != '%')
+		{
 			i++;
-		else if (*(str + size) == '%' && *(str + size + 1) == '%')
+			str++;
+		}
+		else if (*str == '%' && *(str + 1) == '%')
+		{
 			i += 2;
+			str += 2;
+		}
 		else
-			i = get_arg_size(str + size, args);
-		size += i;
+		{
+			i += get_arg_size(str, args);
+			str += get_arg_len(str);
+		}
 	}
 	va_end(args);
-	result = get_result_line(str, size);
+	result = get_result_line(result, i);
 	ft_lstclear(&list_args, free_content);
 	if (result == 0)
 		return (-1);
-	ft_putstr_fd(result, 1);
-	return ((int)ft_strlen(result));
+	ft_putstr_fd((char *)result, 1);
+	result_len = ft_strlen(result);
+	free(result);
+	return ((int)result_len);
 }
 
 int main() {
-	ft_printf("hello %d\n", 42);
+	ft_printf("hello %d %d\n", -1165656667, 0);
 	//printf("%-6.4d\n", 10);
 }

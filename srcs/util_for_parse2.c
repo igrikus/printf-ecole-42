@@ -5,7 +5,7 @@ int get_arg_len(const char *str)
 	int len;
 
 	len = 0;
-	while (*str && (*str > 13 || *str < 9))
+	while (*str && (*str > 13 || *str < 9) && *str != ' ')
 	{
 		str++;
 		len++;
@@ -41,15 +41,15 @@ int get_num_after_dot(const char *arg_str)
 	return (0);
 }
 
-int get_max_of_three(int first, int second, int third)
+void fill_list(void *content)
 {
-	int max;
+	t_list *new;
 
-	if (first >= second && first >= third)
-		max = first;
-	else if (second >= first && second >= third)
-		max = second;
+	if (ft_lstsize(list_args) == 0)
+		list_args = ft_lstnew(content);
 	else
-		max = third;
-	return (max);
+	{
+		new = ft_lstnew(content);
+		ft_lstadd_back(&list_args, new);
+	}
 }

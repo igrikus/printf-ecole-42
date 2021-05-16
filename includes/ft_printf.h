@@ -19,6 +19,7 @@ int get_fill_num(const char *arg_str);
 int get_num_before_dot(const char *arg_str);
 int get_num_after_dot(const char *arg_str);
 int get_max_of_three(int first, int second, int third);
+void fill_list(void *content);
 
 
 t_list *list_args;

@@ -58,6 +58,6 @@ size_t parse_int(const char *str, va_list args)
 	if (parameters[4] == ASTERISK)
 		parameters[4] = va_arg(args, int);
 	result = str_from_arg(parameters, va_arg(args, int));
-	list_args = ft_lstnew(result);
+	fill_list(result);
 	return (ft_strlen(result));
 }
