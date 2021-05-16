@@ -1,4 +1,4 @@
-#include "../includes/ft_printf.h"
+#include "../includes/printf.h"
 
 int get_num_len(int num)
 {
@@ -16,20 +16,20 @@ int get_num_len(int num)
 
 char *str_from_arg(const int parameters[5], int number)
 {
-	char *result;
-	int counter;
+	//char *result;
+	//int counter;
 	int num_len;
-	int malloc_size;
+	//int malloc_size;
 
 	num_len = get_num_len(number);
 	if (num_len >= parameters[2] && num_len >= parameters[4])
 		return (ft_itoa(number));
-	if (parameters[2] > parameters[4])
-		malloc_size = parameters[2];
-	else
-		malloc_size = parameters[4];
-	result = malloc(malloc_size + 1);
-	counter = 0;
+//	if (parameters[2] > parameters[4])
+//		malloc_size = parameters[2];
+//	else
+//		malloc_size = parameters[4];
+//	//result = malloc(malloc_size + 1);
+//	counter = 0;
 	return (0);
 }
 
@@ -38,13 +38,13 @@ size_t parse_int(const char *str, va_list args)
 	int counter;
 	int parameters[5];
 	char *result;
-	const char *arg;
+	char *arg;
 
 	arg = ft_substr(str, 0, get_arg_len(str));
 	if (arg == 0)
 		return (0);
 	counter = 0;
-	while (counter < 4)
+	while (counter < 5)
 		parameters[counter++] = NO;
 	if (arg_contain_zero(arg))
 		parameters[0] = YES;
@@ -59,5 +59,6 @@ size_t parse_int(const char *str, va_list args)
 		parameters[4] = va_arg(args, int);
 	result = str_from_arg(parameters, va_arg(args, int));
 	fill_list(result);
+	free(arg);
 	return (ft_strlen(result));
 }

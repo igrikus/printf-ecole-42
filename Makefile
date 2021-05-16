@@ -1,6 +1,6 @@
 NAME = libftprintf.a
 
-SOURCE = srcs/ft_printf.c srcs/parse_int.c srcs/util_for_parse.c srcs/util_for_parse2.c
+SOURCE = srcs/ft_printf.c srcs/parse_int.c srcs/util_for_parse.c srcs/util_for_parse2.c srcs/util_for_list.c
 
 LIBFT_SOURCE    = libft/ft_memset.c libft/ft_bzero.c libft/ft_memcpy.c libft/ft_memccpy.c libft/ft_memmove.c libft/ft_strlen.c\
 			libft/ft_memchr.c libft/ft_memcmp.c libft/ft_isalpha.c libft/ft_isdigit.c libft/ft_isalnum.c libft/ft_isascii.c\

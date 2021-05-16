@@ -1,4 +1,4 @@
-#include "../includes/ft_printf.h"
+#include "../includes/printf.h"
 
 int arg_contain_minus(const char *arg_str)
 {

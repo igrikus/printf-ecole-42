@@ -1,18 +1,16 @@
-#include "../includes/ft_printf.h"
-
-void free_content(void *content)
-{
-	free(content);
-}
+#include "../includes/printf.h"
 
 char *get_result_line(const char *str, size_t size)
 {
+	t_list *temp;
 	int arg_len;
 	char *result;
 
 	result = malloc(sizeof(char) * (size + 1));
+	ft_memset(result, 0, size + 1);
 	if (result == 0)
 		return (0);
+	temp = list_args;
 	while (*str)
 	{
 		if (*str == '%' && *(str + 1) == '%')
@@ -23,11 +21,11 @@ char *get_result_line(const char *str, size_t size)
 		else if (*str == '%')
 		{
 			arg_len = get_arg_len(str);
-			size_t i = ft_strlcat(result, (const char *) list_args->content, size + 1);
+			size_t i = ft_strlcat(result, (const char *) temp->content, size + 1);
 			printf("ft_strlcat = %zu\n", i);
 			printf("result - %s\n", result);
-			result += ft_strlen((const char *) list_args->content);
-			list_args = list_args->next;
+			result += ft_strlen((const char *) temp->content);
+			temp = temp->next;
 			str += arg_len;
 		}
 		else
@@ -71,7 +69,7 @@ int ft_printf(const char *str, ...)
 	va_list args;
 	char *result;
 
-	result = (char*)str;
+	result = (char *)str;
 	va_start(args, str);
 	i = 0;
 	while (*str)
