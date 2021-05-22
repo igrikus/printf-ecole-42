@@ -1,4 +1,4 @@
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 int get_num_len(int num)
 {

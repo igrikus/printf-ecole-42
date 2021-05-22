@@ -1,4 +1,4 @@
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 char *get_result_line(const char *str, size_t size)
 {

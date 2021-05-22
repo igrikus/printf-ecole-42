@@ -1,4 +1,4 @@
-#include "../includes/printf.h"
+#include "../includes/ft_printf.h"
 
 static t_sides get_side_if_contain_dot(t_sides side, t_parameter parameter,
 									   int max_len, int arg_len)
