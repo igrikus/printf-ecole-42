@@ -21,9 +21,7 @@ char *get_result_line(const char *str, size_t size)
 		else if (*str == '%')
 		{
 			arg_len = get_arg_len(str);
-			size_t i = ft_strlcat(result, (const char *) temp->content, size + 1);
-			printf("ft_strlcat = %zu\n", i);
-			printf("result - %s\n", result);
+			ft_strlcat(result, (const char *) temp->content, size + 1);
 			result += ft_strlen((const char *) temp->content);
 			temp = temp->next;
 			str += arg_len;
@@ -102,6 +100,8 @@ int ft_printf(const char *str, ...)
 }
 
 int main() {
-	ft_printf("hello %d %d\n", -1165656667, 0);
-	//printf("%-6.4d\n", 10);
+	int before_flag = 10;
+	//int after_flag = 5;
+	ft_printf("our shit   : hello %-0*d\n", before_flag, 42);
+	//printf("real printf: hello %-*.*d\n", before_flag, after_flag, 42);
 }

@@ -17,7 +17,7 @@ int get_num_before_dot(const char *arg_str)
 {
 	while (*arg_str && *arg_str != '.')
 	{
-		if (ft_isdigit(*arg_str))
+		if (ft_isdigit(*arg_str) && *arg_str != '0')
 			return (ft_atoi(arg_str));
 		if (*arg_str == '*')
 			return (ASTERISK);

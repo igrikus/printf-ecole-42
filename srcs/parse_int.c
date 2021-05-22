@@ -14,50 +14,64 @@ int get_num_len(int num)
 	return (len);
 }
 
-char *str_from_arg(const int parameters[5], int number)
+void get_result_str(t_sides side, int number,
+					 int num_len, char *result)
 {
-	//char *result;
-	//int counter;
+	ft_memset(result, ' ', side.left);
+	result += side.left;
+	ft_memset(result, '0', side.null_left);
+	result += side.null_left;
+	ft_strlcat(result, ft_itoa(number), num_len + 1);
+	result += num_len;
+	ft_memset(result, '0', side.null_right);
+	result += side.null_right;
+	ft_memset(result, ' ', side.right);
+	result += side.right;
+	*result = 0;
+}
+
+char *str_from_arg(t_parameter parameter, int number)
+{
+	char *result;
+	int max_len;
 	int num_len;
-	//int malloc_size;
 
 	num_len = get_num_len(number);
-	if (num_len >= parameters[2] && num_len >= parameters[4])
+	if (num_len >= parameter.num_before_dot
+		&& num_len >= parameter.num_after_dot)
 		return (ft_itoa(number));
-//	if (parameters[2] > parameters[4])
-//		malloc_size = parameters[2];
-//	else
-//		malloc_size = parameters[4];
-//	//result = malloc(malloc_size + 1);
-//	counter = 0;
-	return (0);
+	if (parameter.num_before_dot > parameter.num_after_dot)
+		max_len = parameter.num_before_dot;
+	else
+		max_len = parameter.num_after_dot;
+	result = malloc(max_len + 1);
+	ft_memset(result, 0, max_len + 1);
+	get_result_str(get_sides(parameter, max_len, num_len),
+				number, num_len, result);
+	return (result);
 }
 
 size_t parse_int(const char *str, va_list args)
 {
-	int counter;
-	int parameters[5];
+	t_parameter parameter;
 	char *result;
 	char *arg;
 
 	arg = ft_substr(str, 0, get_arg_len(str));
 	if (arg == 0)
 		return (0);
-	counter = 0;
-	while (counter < 5)
-		parameters[counter++] = NO;
 	if (arg_contain_zero(arg))
-		parameters[0] = YES;
+		parameter.contain_zero = YES;
 	if (arg_contain_minus(arg))
-		parameters[1] = YES;
-	parameters[2] = get_num_before_dot(arg);
-	if (parameters[2] == ASTERISK)
-		parameters[2] = va_arg(args, int);
-	if ((parameters[3] = arg_contain_dot(arg)))
-		parameters[4] = get_num_after_dot(arg);
-	if (parameters[4] == ASTERISK)
-		parameters[4] = va_arg(args, int);
-	result = str_from_arg(parameters, va_arg(args, int));
+		parameter.contain_minus = YES;
+	parameter.num_before_dot = get_num_before_dot(arg);
+	if (parameter.num_before_dot == ASTERISK)
+		parameter.num_before_dot = va_arg(args, int);
+	if ((parameter.contain_dot = arg_contain_dot(arg)))
+		parameter.num_after_dot = get_num_after_dot(arg);
+	if (parameter.num_after_dot == ASTERISK)
+		parameter.num_after_dot = va_arg(args, int);
+	result = str_from_arg(parameter, va_arg(args, int));
 	fill_list(result);
 	free(arg);
 	return (ft_strlen(result));
