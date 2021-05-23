@@ -13,13 +13,13 @@ SOURCE_BONUS   =  ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lst
 OBJ = $(patsubst %.c,%.o,$(SOURCE))
 OBJ_BONUS = $(patsubst %.c,%.o,$(SOURCE_BONUS))
 
-D_FILES = $(patsubst %.c,%.d,$(SOURCE))
+D_FILES = $(patsubst %.c,%.d,$(SOURCE) $(SOURCE_BONUS))
 
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(OBJ_BONUS)
 	ar rcs $(NAME) $?
 
 %.o: %.c
@@ -27,8 +27,8 @@ $(NAME): $(OBJ)
 
 include $(wildcard $(D_FILES))
 
-bonus:
-	@make OBJ="$(OBJ_BONUS)" all
+#bonus:
+#	@make OBJ="$(OBJ_BONUS)" all
 
 clean:
 	@rm -f $(OBJ) $(OBJ_BONUS) $(D_FILES)

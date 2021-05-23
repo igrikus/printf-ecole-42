@@ -24,7 +24,6 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C libft
-	@make bonus -C libft
 	ar rcs $(NAME) $?
 
 %.o: %.c

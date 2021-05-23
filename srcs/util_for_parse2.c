@@ -2,10 +2,12 @@
 
 int get_arg_len(const char *str)
 {
+	char *flags = "cspdiuxX";
 	int len;
 
-	len = 0;
-	while (*str && (*str > 13 || *str < 9) && *str != ' ')
+	len = 1;
+	str++;
+	while (*str && (*str > 13 || *str < 9) && *str != ' ' && ft_memchr(flags, *(str - 1), 8) == 0)
 	{
 		str++;
 		len++;

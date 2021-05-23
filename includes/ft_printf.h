@@ -26,6 +26,7 @@ typedef struct	s_sides
 	int null_right;
 }				t_sides;
 
+int ft_printf(const char *str, ...);
 size_t parse_int(const char *str, va_list list_args);
 int get_arg_len(const char *str);
 int arg_contain_minus(const char *arg_str);
@@ -39,7 +40,7 @@ int get_max_of_three(int first, int second, int third);
 void fill_list(void *content);
 void free_content(void *content);
 t_sides get_sides(t_parameter parameter, int max_len, int arg_len);
-t_parameter fill_parameter_with_null(t_parameter parameter);
+t_parameter fill_parameter(char *arg_str, va_list args);
 
 t_list *list_args;
 

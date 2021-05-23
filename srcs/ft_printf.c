@@ -100,8 +100,7 @@ int ft_printf(const char *str, ...)
 }
 
 int main() {
-	int before_flag = 10;
-	//int after_flag = 5;
-	ft_printf("our shit   : hello %-0*d\n", before_flag, 42);
-	//printf("real printf: hello %-*.*d\n", before_flag, after_flag, 42);
+	ft_printf("%-6.2d", 102);
+	write(1, "\n", 1);
+	printf("%-6.2d", 102);
 }
