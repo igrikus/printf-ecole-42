@@ -100,7 +100,7 @@ int ft_printf(const char *str, ...)
 }
 
 int main() {
-	ft_printf("%-6.2d", 102);
+	ft_printf(" 0*%0-*d*0 0*%0*d*0 ", 21, 1021, 21, -1011);
 	write(1, "\n", 1);
-	printf("%-6.2d", 102);
+	printf(" 0*%0-*d*0 0*%0*d*0 ", 21, 1021, 21, -1011);
 }
