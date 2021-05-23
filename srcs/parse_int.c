@@ -17,11 +17,15 @@ int get_num_len(int num)
 void get_result_str(t_sides side, int number,
 					 int num_len, char *result)
 {
+	char *itoa_str;
+
 	ft_memset(result, ' ', side.left);
 	result += side.left;
 	ft_memset(result, '0', side.null_left);
 	result += side.null_left;
-	ft_strlcat(result, ft_itoa(number), num_len + 1);
+	itoa_str = ft_itoa(number);
+	ft_strlcat(result, itoa_str, num_len + 1);
+	free(itoa_str);
 	result += num_len;
 	ft_memset(result, '0', side.null_right);
 	result += side.null_right;
@@ -57,6 +61,7 @@ size_t parse_int(const char *str, va_list args)
 	char *result;
 	char *arg;
 
+	parameter = fill_parameter_with_null(parameter);
 	arg = ft_substr(str, 0, get_arg_len(str));
 	if (arg == 0)
 		return (0);

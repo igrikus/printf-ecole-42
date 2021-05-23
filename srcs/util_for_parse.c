@@ -48,3 +48,13 @@ int arg_contain_asterisk(const char *arg_str)
 	}
 	return (NO);
 }
+
+t_parameter fill_parameter_with_null(t_parameter parameter)
+{
+	parameter.contain_dot = 0;
+	parameter.contain_minus = 0;
+	parameter.contain_zero = 0;
+	parameter.num_after_dot = 0;
+	parameter.num_before_dot = 0;
+	return (parameter);
+}

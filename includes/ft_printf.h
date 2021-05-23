@@ -39,6 +39,7 @@ int get_max_of_three(int first, int second, int third);
 void fill_list(void *content);
 void free_content(void *content);
 t_sides get_sides(t_parameter parameter, int max_len, int arg_len);
+t_parameter fill_parameter_with_null(t_parameter parameter);
 
 t_list *list_args;
 
