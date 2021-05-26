@@ -99,8 +99,8 @@ int ft_printf(const char *str, ...)
 	return ((int)result_len);
 }
 
-//int main() {
-//	ft_printf("%06d", -1011);
-//	write(1, "\n", 1);
-//	printf("%06d", -1011);
-//}
+int main() {
+	ft_printf("%.6d", -1011);
+	write(1, "\n", 1);
+	printf("%.6d", -1011);
+}

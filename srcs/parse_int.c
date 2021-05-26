@@ -5,10 +5,6 @@ void get_result_str(t_sides side, int number,
 {
 	char *itoa_str;
 
-	if (number < 0 && side.left)
-		side.left--;
-	else if (number < 0 && side.right)
-		side.right--;
 	ft_memset(result, ' ', side.left);
 	result += side.left;
 	if (number < 0)
@@ -30,6 +26,7 @@ void get_result_str(t_sides side, int number,
 
 char *str_from_arg(t_parameter parameter, int number)
 {
+	t_sides sides;
 	char *result;
 	int max_len;
 	int num_len;
@@ -44,8 +41,15 @@ char *str_from_arg(t_parameter parameter, int number)
 		max_len = parameter.num_after_dot;
 	result = malloc(max_len + 1);
 	ft_memset(result, 0, max_len + 1);
-	get_result_str(get_sides(parameter, max_len, num_len),
-				number, num_len, result);
+	sides = get_sides(parameter, max_len, num_len);
+	if (number < 0 && sides.left)
+		sides.left--;
+	else if (number < 0 && sides.right)
+		sides.right--;
+	else if (number < 0 && sides.null_left && !parameter.contain_dot
+	&& !sides.left && !sides.right)
+		sides.null_left--;
+	get_result_str(sides, number, num_len, result);
 	return (result);
 }
 
