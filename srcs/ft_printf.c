@@ -99,8 +99,8 @@ int ft_printf(const char *str, ...)
 	return ((int)result_len);
 }
 
-int main() {
-	ft_printf(" 0*%0-*d*0 0*%0*d*0 ", 21, 1021, 21, -1011);
-	write(1, "\n", 1);
-	printf(" 0*%0-*d*0 0*%0*d*0 ", 21, 1021, 21, -1011);
-}
+//int main() {
+//	ft_printf("%06d", -1011);
+//	write(1, "\n", 1);
+//	printf("%06d", -1011);
+//}

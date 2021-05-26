@@ -25,10 +25,7 @@ static t_sides get_side_if_no_dot(t_sides side, t_parameter parameter,
 {
 	if (parameter.contain_minus)
 	{
-		if (parameter.contain_zero)
-			side.null_right = parameter.num_before_dot - arg_len;
-		else
-			side.right = parameter.num_before_dot - arg_len;
+		side.right = parameter.num_before_dot - arg_len;
 	}
 	else
 	{
@@ -47,7 +44,6 @@ t_sides get_sides(t_parameter parameter, int max_len, int arg_len)
 	side.left = 0;
 	side.null_left = 0;
 	side.right = 0;
-	side.null_right = 0;
 	if (parameter.contain_dot)
 		side = get_side_if_contain_dot(side, parameter, max_len, arg_len);
 	else

@@ -1,19 +1,5 @@
 #include "../includes/ft_printf.h"
 
-int get_num_len(int num)
-{
-	int	len;
-
-	len = 1;
-	while (num != 0)
-	{
-		num /= 10;
-		if (num != 0)
-			len++;
-	}
-	return (len);
-}
-
 void get_result_str(t_sides side, int number,
 					 int num_len, char *result)
 {
@@ -26,18 +12,17 @@ void get_result_str(t_sides side, int number,
 	ft_memset(result, ' ', side.left);
 	result += side.left;
 	if (number < 0)
-	{
 		*(result++) = '-';
-		number *= -1;
-	}
 	ft_memset(result, '0', side.null_left);
 	result += side.null_left;
 	itoa_str = ft_itoa(number);
+	if (number < 0)
+		itoa_str++;
 	ft_strlcat(result, itoa_str, num_len + 1);
+	if (number < 0)
+		itoa_str--;
 	free(itoa_str);
 	result += num_len;
-	ft_memset(result, '0', side.null_right);
-	result += side.null_right;
 	ft_memset(result, ' ', side.right);
 	result += side.right;
 	*result = 0;
@@ -64,6 +49,22 @@ char *str_from_arg(t_parameter parameter, int number)
 	return (result);
 }
 
+char *fill_result_if_number_zero(t_parameter parameter)
+{
+	char *result;
+
+	if (parameter.num_before_dot == 0)
+	{
+		result = malloc(sizeof(char));
+		*result = 0;
+		return (result);
+	}
+	result = malloc(sizeof(char) * (parameter.num_before_dot + 1));
+	ft_memset(result, ' ', parameter.num_before_dot);
+	*(result + parameter.num_before_dot) = 0;
+	return (result);
+}
+
 size_t parse_int(const char *str, va_list args)
 {
 	t_parameter parameter;
@@ -77,10 +78,7 @@ size_t parse_int(const char *str, va_list args)
 	parameter = fill_parameter(arg_str, args);
 	number = va_arg(args, int);
 	if (parameter.contain_dot && parameter.num_after_dot == 0 && number == 0)
-	{
-		result = malloc(sizeof(char));
-		*result = 0;
-	}
+		result = fill_result_if_number_zero(parameter);
 	else
 		result = str_from_arg(parameter, number);
 	fill_list(result);

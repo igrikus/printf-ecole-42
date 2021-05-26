@@ -7,10 +7,25 @@ int get_arg_len(const char *str)
 
 	len = 1;
 	str++;
-	while (*str && (*str > 13 || *str < 9) && *str != ' ' && ft_memchr(flags, *(str - 1), 8) == 0)
+	while (*str && (*str > 13 || *str < 9) && *str != ' '
+	&& ft_memchr(flags, *(str - 1), 8) == 0)
 	{
 		str++;
 		len++;
+	}
+	return (len);
+}
+
+int get_num_len(int num)
+{
+	int	len;
+
+	len = 1;
+	while (num != 0)
+	{
+		num /= 10;
+		if (num != 0)
+			len++;
 	}
 	return (len);
 }
