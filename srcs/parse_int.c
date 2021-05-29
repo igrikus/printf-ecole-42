@@ -1,5 +1,16 @@
 #include "../includes/ft_printf.h"
 
+char	*get_malloc_result(int number, int max_len)
+{
+	char *result;
+
+	if (number < 0)
+		result = malloc(sizeof(char) * (max_len + 2));
+	else
+		result = malloc(sizeof(char) * (max_len + 1));
+	return (result);
+}
+
 void get_result_str(t_sides side, int number,
 					 int num_len, char *result)
 {
@@ -39,7 +50,7 @@ char *str_from_arg(t_parameter parameter, int number)
 		max_len = parameter.num_before_dot;
 	else
 		max_len = parameter.num_after_dot;
-	result = malloc(max_len + 1);
+	result = get_malloc_result(number, max_len);
 	ft_memset(result, 0, max_len + 1);
 	sides = get_sides(parameter, max_len, num_len);
 	if (number < 0 && sides.left)
