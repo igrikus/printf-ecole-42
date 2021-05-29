@@ -79,7 +79,7 @@ int ft_printf(const char *str, ...)
 		}
 		else if (*str == '%' && *(str + 1) == '%')
 		{
-			i += 2;
+			i++;
 			str += 2;
 		}
 		else
@@ -100,7 +100,7 @@ int ft_printf(const char *str, ...)
 }
 
 int main() {
-	ft_printf("%.6d", -1011);
+	ft_printf("%%.6d and of course %-5d", 754);
 	write(1, "\n", 1);
-	printf("%.6d", -1011);
+	printf("%%.6d and of course %-5d", 754);
 }
