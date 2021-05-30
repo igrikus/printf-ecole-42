@@ -44,8 +44,8 @@ size_t get_arg_size(const char *str, va_list args)
 	{
 		if (symbol == 'd' || symbol == 'i')
 			return (parse_int(str, args));
-//		else if (symbol == 's')
-//			return (parse_str(str, args));
+		else if (symbol == 's')
+			return (parse_str(str, args));
 //		else if (symbol == 'c')
 //			return (parse_char(str, args));
 //		else if (symbol == 'p')
@@ -99,8 +99,8 @@ int ft_printf(const char *str, ...)
 	return ((int)result_len);
 }
 
-int main() {
-	ft_printf("%%.6d and of course %-5d", 754);
-	write(1, "\n", 1);
-	printf("%%.6d and of course %-5d", 754);
-}
+//int main() {
+//	ft_printf("%6s", "123");
+//	write(1, "\n", 1);
+//	printf("%6s", "123");
+//}

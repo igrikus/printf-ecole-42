@@ -11,7 +11,7 @@ char	*get_malloc_result(int number, int max_len, t_parameter parameter)
 	return (result);
 }
 
-void get_result_str(t_sides side, int number,
+static void get_result_str(t_sides side, int number,
 					 int num_len, char *result)
 {
 	char *itoa_str;
@@ -35,7 +35,7 @@ void get_result_str(t_sides side, int number,
 	*result = 0;
 }
 
-char *str_from_arg(t_parameter parameter, int number)
+static char *str_from_arg(t_parameter parameter, int number)
 {
 	t_sides sides;
 	char *result;
@@ -52,7 +52,7 @@ char *str_from_arg(t_parameter parameter, int number)
 		max_len = parameter.num_after_dot;
 	result = get_malloc_result(number, max_len, parameter);
 	ft_memset(result, 0, max_len + 1);
-	sides = get_sides(parameter, max_len, num_len);
+	sides = get_sides_int(parameter, max_len, num_len);
 	if (number < 0 && sides.left)
 		sides.left--;
 	else if (number < 0 && sides.right)
