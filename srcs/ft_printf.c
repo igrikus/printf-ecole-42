@@ -100,7 +100,7 @@ int ft_printf(const char *str, ...)
 }
 
 //int main() {
-//	ft_printf("%6s", "123");
+//	ft_printf("%32s", "abc");
 //	write(1, "\n", 1);
-//	printf("%6s", "123");
+//	printf("%32s", "abc");
 //}

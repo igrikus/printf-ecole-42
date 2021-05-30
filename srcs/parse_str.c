@@ -6,7 +6,7 @@ char *trim_arg_str(t_parameter parameter, char *arg, size_t arg_len)
 	int count;
 
 	count = 0;
-	if (parameter.contain_dot)
+	if (parameter.contain_dot && parameter.num_after_dot >= 0)
 	{
 		result = malloc(sizeof(char) * (parameter.num_before_dot + 1));
 		while (*arg && count < parameter.num_after_dot)
@@ -53,22 +53,22 @@ static char *str_from_arg(t_parameter parameter, char *arg)
 	size_t str_len;
 
 	str_len = ft_strlen(arg);
-	if (str_len >= (size_t) parameter.num_before_dot)
+	trim_str = trim_arg_str(parameter, arg, str_len);
+	if (str_len < ft_strlen(trim_str))
 		max_len = str_len;
 	else
 		max_len = parameter.num_before_dot;
+	str_len = ft_strlen(trim_str);
 	result = malloc(sizeof(char) * (max_len + 1));
 	if (result == 0)
 		return (0);
 	ft_memset(result, 0, max_len + 1);
-	trim_str = trim_arg_str(parameter, arg, str_len);
 	if (str_len >= (size_t) parameter.num_before_dot)
 	{
 		ft_strlcat(result, trim_str, str_len + 1);
 		free(trim_str);
 		return (result);
 	}
-	str_len = ft_strlen(trim_str);
 	sides = get_sides_str(parameter, str_len);
 	get_result_str(sides, trim_str, str_len, result);
 	free(trim_str);
@@ -88,7 +88,7 @@ size_t parse_str(const char *str, va_list args)
 	parameter = fill_parameter(arg_str, args);
 	arg = va_arg(args, char *);
 	if (arg == 0)
-		arg = "";
+		arg = "(null)";
 	result = str_from_arg(parameter, arg);
 	if (result == 0)
 		return (0);
