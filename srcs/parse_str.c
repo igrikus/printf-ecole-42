@@ -1,43 +1,43 @@
 #include "../includes/ft_printf.h"
 
-char *trim_arg_str(t_parameter parameter, char *arg, char *result)
+char *trim_arg_str(t_parameter parameter, char *arg, size_t arg_len)
 {
-	size_t arg_len;
+	char *result;
 	int count;
 
 	count = 0;
 	if (parameter.contain_dot)
 	{
+		result = malloc(sizeof(char) * (parameter.num_before_dot + 1));
 		while (*arg && count < parameter.num_after_dot)
 		{
 			*(result++) = *(arg++);
 			count++;
 		}
-	} else
+	}
+	else
 	{
-		arg_len = ft_strlen(arg);
-		while ((size_t)count < arg_len)
+		result = malloc(sizeof(char) * (arg_len + 1));
+		while ((size_t) count < arg_len)
 		{
 			*(result++) = *(arg++);
 			count++;
 		}
 	}
-	result -= count;
-	return (result);
+	*result = 0;
+	return (result - count);
 }
 
-static void get_result_str(t_sides sides, t_parameter parameter,
-					char *arg, char *result)
+static void get_result_str(t_sides sides, char *trim_str,
+						   size_t trim_str_len, char *result)
 {
-	size_t arg_len;
 	size_t count;
 
-	arg_len = ft_strlen(arg);
 	count = 0;
 	while (count++ < sides.left)
 		*(result++) = ' ';
-	result = trim_arg_str(parameter, arg, result);
-	result += arg_len;
+	ft_strlcat(result, trim_str, trim_str_len + 1);
+	result += trim_str_len;
 	count = 0;
 	while (count++ < sides.right)
 		*(result++) = ' ';
@@ -48,6 +48,7 @@ static char *str_from_arg(t_parameter parameter, char *arg)
 {
 	t_sides sides;
 	char *result;
+	char *trim_str;
 	size_t max_len;
 	size_t str_len;
 
@@ -60,10 +61,17 @@ static char *str_from_arg(t_parameter parameter, char *arg)
 	if (result == 0)
 		return (0);
 	ft_memset(result, 0, max_len + 1);
+	trim_str = trim_arg_str(parameter, arg, str_len);
 	if (str_len >= (size_t) parameter.num_before_dot)
-		return (trim_arg_str(parameter, arg, result));
+	{
+		ft_strlcat(result, trim_str, str_len + 1);
+		free(trim_str);
+		return (result);
+	}
+	str_len = ft_strlen(trim_str);
 	sides = get_sides_str(parameter, str_len);
-	get_result_str(sides, parameter, arg, result);
+	get_result_str(sides, trim_str, str_len, result);
+	free(trim_str);
 	return (result);
 }
 
