@@ -30,6 +30,20 @@ int get_num_len(int num)
 	return (len);
 }
 
+int get_unsigned_num_len(unsigned int num)
+{
+	int	len;
+
+	len = 1;
+	while (num != 0)
+	{
+		num /= 10;
+		if (num != 0)
+			len++;
+	}
+	return (len);
+}
+
 int get_num_before_dot(const char *arg_str)
 {
 	while (*arg_str && *arg_str != '.')

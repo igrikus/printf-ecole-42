@@ -50,8 +50,8 @@ size_t get_arg_size(const char *str, va_list args)
 //			return (parse_char(str, args));
 //		else if (symbol == 'p')
 //			return (parse_pointer(str, args));
-//		else if (symbol == 'u')
-//			return (parse_unsigned(str, args));
+		else if (symbol == 'u')
+			return (parse_unsigned(str, args));
 //		else if (symbol == 'x' || symbol == 'X')
 //			return (parse_hex(str, args));
 		i++;
@@ -100,7 +100,7 @@ int ft_printf(const char *str, ...)
 }
 
 //int main() {
-//	ft_printf("%32s", "abc");
+//	ft_printf("%u", -15);
 //	write(1, "\n", 1);
-//	printf("%32s", "abc");
+//	printf("%u", -15);
 //}
