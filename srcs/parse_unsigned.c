@@ -68,7 +68,7 @@ size_t parse_unsigned(const char *str, va_list args)
 	if (arg_str == 0)
 		return (0);
 	parameter = fill_parameter(arg_str, args);
-	number = va_arg(args, int);
+	number = va_arg(args, unsigned int);
 	if (parameter.contain_dot && parameter.num_after_dot == 0 && number == 0)
 		result = fill_result_if_number_zero(parameter);
 	else

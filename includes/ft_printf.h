@@ -29,6 +29,7 @@ int ft_printf(const char *str, ...);
 size_t parse_int(const char *str, va_list list_args);
 size_t parse_str(const char *str, va_list args);
 size_t parse_unsigned(const char *str, va_list args);
+size_t parse_char(const char *str, va_list args);
 int get_arg_len(const char *str);
 int arg_contain_minus(const char *arg_str);
 int arg_contain_dot(const char *arg_str);
