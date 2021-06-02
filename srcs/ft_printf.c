@@ -97,8 +97,8 @@ int ft_printf(const char *str, ...)
 	return ((int)size);
 }
 
-int main() {
-	ft_printf("%c", 0);
-	write(1, "\n", 1);
-	printf("%c", 0);
-}
+//int main() {
+//	ft_printf("%c", 0);
+//	write(1, "\n", 1);
+//	printf("%c", 0);
+//}

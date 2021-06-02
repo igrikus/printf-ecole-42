@@ -1,15 +1,5 @@
 #include "../includes/ft_printf.h"
 
-static char	*get_malloc_result(int max_len)
-{
-	char *result;
-
-	result = malloc(sizeof(char) * (max_len + 1));
-	if (result == 0)
-		return (0);
-	return (result);
-}
-
 static void get_result_str(t_sides side, unsigned int number,
 						   int num_len, char *result)
 {
@@ -44,7 +34,8 @@ static char *str_from_arg(t_parameter parameter, unsigned int number)
 	else
 		max_len = parameter.num_after_dot;
 	result = get_malloc_result(max_len);
-	ft_memset(result, 0, max_len + 1);
+	if (result == 0)
+		return (0);
 	sides = get_sides_int(parameter, max_len, num_len);
 	if (number < 0 && sides.left)
 		sides.left--;
@@ -73,6 +64,8 @@ size_t parse_unsigned(const char *str, va_list args)
 		result = fill_result_if_number_zero(parameter);
 	else
 		result = str_from_arg(parameter, number);
+	if (result == 0)
+		return (0);
 	fill_list(result);
 	free(arg_str);
 	return (ft_strlen(result));

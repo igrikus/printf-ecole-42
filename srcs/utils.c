@@ -1,5 +1,16 @@
 #include "../includes/ft_printf.h"
 
+char	*get_malloc_result(size_t max_len)
+{
+	char *result;
+
+	result = malloc(sizeof(char) * (max_len + 1));
+	if (result == 0)
+		return (0);
+	ft_memset(result, 0, max_len + 1);
+	return (result);
+}
+
 void free_content(void *content)
 {
 	free(content);

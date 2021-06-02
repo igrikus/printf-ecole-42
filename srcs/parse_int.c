@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-static char	*get_malloc_result(int number, int max_len, t_parameter parameter)
+static char	*get_malloc_int_str(int number, int max_len, t_parameter parameter)
 {
 	char *result;
 
@@ -10,6 +10,10 @@ static char	*get_malloc_result(int number, int max_len, t_parameter parameter)
 		result = malloc(sizeof(char) * (max_len + 1));
 	if (result == 0)
 		return (0);
+	if (number < 0 && parameter.num_before_dot <= parameter.num_after_dot)
+		ft_memset(result, 0, max_len + 2);
+	else
+		ft_memset(result, 0, max_len + 1);
 	return (result);
 }
 
@@ -52,8 +56,9 @@ static char *str_from_arg(t_parameter parameter, int number)
 		max_len = parameter.num_before_dot;
 	else
 		max_len = parameter.num_after_dot;
-	result = get_malloc_result(number, max_len, parameter);
-	ft_memset(result, 0, max_len + 1);
+	result = get_malloc_int_str(number, max_len, parameter);
+	if (result == 0)
+		return (0);
 	sides = get_sides_int(parameter, max_len, num_len);
 	if (number < 0 && sides.left)
 		sides.left--;
@@ -77,6 +82,8 @@ char *fill_result_if_number_zero(t_parameter parameter)
 		return (result);
 	}
 	result = malloc(sizeof(char) * (parameter.num_before_dot + 1));
+	if (result == 0)
+		return (0);
 	ft_memset(result, ' ', parameter.num_before_dot);
 	*(result + parameter.num_before_dot) = 0;
 	return (result);
@@ -98,6 +105,8 @@ size_t parse_int(const char *str, va_list args)
 		result = fill_result_if_number_zero(parameter);
 	else
 		result = str_from_arg(parameter, number);
+	if (result == 0)
+		return (0);
 	fill_list(result);
 	free(arg_str);
 	return (ft_strlen(result));

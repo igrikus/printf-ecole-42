@@ -45,6 +45,7 @@ t_parameter fill_parameter(char *arg_str, va_list args);
 int get_num_len(int num);
 int get_unsigned_num_len(unsigned int num);
 char	*ft_unsigned_itoa(unsigned int n);
+char	*get_malloc_result(size_t max_len);
 
 t_list *list_args;
 

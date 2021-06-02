@@ -24,10 +24,9 @@ static char *str_from_arg(t_parameter parameter, char arg)
 		max_len = parameter.num_before_dot;
 	else
 		max_len = 1;
-	result = malloc(sizeof(char) * (max_len + 1));
+	result = get_malloc_result(max_len);
 	if (result == 0)
 		return (0);
-	ft_memset(result, 0, max_len + 1);
 	if (max_len == 1)
 	{
 		*(result++) = arg;

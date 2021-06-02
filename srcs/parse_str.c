@@ -59,10 +59,9 @@ static char *str_from_arg(t_parameter parameter, char *arg)
 	else
 		max_len = parameter.num_before_dot;
 	str_len = ft_strlen(trim_str);
-	result = malloc(sizeof(char) * (max_len + 1));
+	result = get_malloc_result(max_len);
 	if (result == 0)
 		return (0);
-	ft_memset(result, 0, max_len + 1);
 	if (str_len >= (size_t) parameter.num_before_dot)
 	{
 		ft_strlcat(result, trim_str, str_len + 1);
