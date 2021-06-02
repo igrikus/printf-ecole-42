@@ -62,45 +62,43 @@ size_t get_arg_size(const char *str, va_list args)
 
 int ft_printf(const char *str, ...)
 {
-	size_t result_len;
-	size_t i;
+	size_t size;
 	va_list args;
 	char *result;
 
 	result = (char *)str;
 	va_start(args, str);
-	i = 0;
+	size = 0;
 	while (*str)
 	{
 		if (*str != '%')
 		{
-			i++;
+			size++;
 			str++;
 		}
 		else if (*str == '%' && *(str + 1) == '%')
 		{
-			i++;
+			size++;
 			str += 2;
 		}
 		else
 		{
-			i += get_arg_size(str, args);
+			size += get_arg_size(str, args);
 			str += get_arg_len(str);
 		}
 	}
 	va_end(args);
-	result = get_result_line(result, i);
+	result = get_result_line(result, size);
 	ft_lstclear(&list_args, free_content);
 	if (result == 0)
 		return (-1);
 	ft_putstr_fd((char *)result, 1);
-	result_len = ft_strlen(result);
 	free(result);
-	return ((int)result_len);
+	return ((int)size);
 }
 
 int main() {
-	ft_printf("hey %c", 0);
+	ft_printf("%c", 0);
 	write(1, "\n", 1);
-	printf("hey %c", 0);
+	printf("%c", 0);
 }
