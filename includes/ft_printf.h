@@ -44,7 +44,7 @@ int get_num_before_dot(const char *arg_str);
 int get_num_after_dot(const char *arg_str);
 void fill_list(void *content);
 void free_content(void *content);
-char *fill_result_if_number_zero(t_parameter parameter);
+t_arg fill_result_if_number_zero(t_parameter parameter, t_arg result);
 t_sides get_sides_int(t_parameter parameter, size_t max_len, size_t arg_len);
 t_sides get_sides_str(t_parameter parameter, size_t arg_len);
 t_parameter fill_parameter(char *arg_str, va_list args);

@@ -1,17 +1,17 @@
 #include "../includes/ft_printf.h"
 
 static t_sides get_side_if_contain_dot(t_sides side, t_parameter parameter,
-									   int max_len, int arg_len)
+									   size_t max_len, size_t arg_len)
 {
 	if (parameter.num_before_dot > parameter.num_after_dot)
 	{
 		if (parameter.contain_minus)
-			if (parameter.num_after_dot > arg_len)
+			if (parameter.num_after_dot > (int)arg_len)
 				side.right = parameter.num_before_dot - parameter.num_after_dot;
 			else
 				side.right = parameter.num_before_dot - arg_len;
 		else
-			if (parameter.num_after_dot > arg_len)
+			if (parameter.num_after_dot > (int)arg_len)
 				side.left = parameter.num_before_dot - parameter.num_after_dot;
 			else
 				side.left = parameter.num_before_dot - arg_len;
@@ -21,7 +21,7 @@ static t_sides get_side_if_contain_dot(t_sides side, t_parameter parameter,
 }
 
 static t_sides get_side_if_no_dot(t_sides side, t_parameter parameter,
-								  int arg_len)
+								  size_t arg_len)
 {
 	if (parameter.contain_minus)
 	{

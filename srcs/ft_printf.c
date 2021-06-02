@@ -6,11 +6,10 @@ char *get_result_line(const char *str, size_t size)
 	int arg_len;
 	char *result;
 
-	result = malloc(sizeof(char) * (size + 1));
-	ft_memset(result, 0, size + 1);
+	result = get_malloc_result(size);
+	temp = list_args;
 	if (result == 0)
 		return (0);
-	temp = list_args;
 	while (*str)
 	{
 		if (*str == '%' && *(str + 1) == '%')
@@ -20,15 +19,17 @@ char *get_result_line(const char *str, size_t size)
 		}
 		else if (*str == '%')
 		{
+			t_arg *arg = (t_arg *)list_args->content;
 			arg_len = get_arg_len(str);
-			ft_strlcat(result, (const char *) temp->content, size + 1);
-			result += ft_strlen((const char *) temp->content);
+			ft_strlcat(result, (const char *) arg->str, size + 1);
+			result += arg->str_len;
 			temp = temp->next;
 			str += arg_len;
 		}
 		else
 			*(result++) = *(str++);
 	}
+	list_args = temp;
 	*result = 0;
 	return (result - size);
 }
@@ -50,8 +51,8 @@ size_t get_arg_size(const char *str, va_list args)
 			return (parse_char(str, args));
 //		else if (symbol == 'p')
 //			return (parse_pointer(str, args));
-		else if (symbol == 'u')
-			return (parse_unsigned(str, args));
+//		else if (symbol == 'u')
+//			return (parse_unsigned(str, args));
 //		else if (symbol == 'x' || symbol == 'X')
 //			return (parse_hex(str, args));
 		i++;
@@ -97,8 +98,8 @@ int ft_printf(const char *str, ...)
 	return ((int)size);
 }
 
-//int main() {
-//	ft_printf("%c", 0);
-//	write(1, "\n", 1);
-//	printf("%c", 0);
-//}
+int main() {
+	ft_printf("%d", 5);
+	write(1, "\n", 1);
+	printf("%d", 5);
+}
