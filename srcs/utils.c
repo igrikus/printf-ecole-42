@@ -1,5 +1,19 @@
 #include "../includes/ft_printf.h"
 
+size_t	get_num_len(int num)
+{
+	int	len;
+
+	len = 1;
+	while (num != 0)
+	{
+		num /= 10;
+		if (num != 0)
+			len++;
+	}
+	return (len);
+}
+
 char	*get_malloc_result(size_t max_len)
 {
 	char *result;

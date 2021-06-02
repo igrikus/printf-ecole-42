@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-static char	*get_malloc_int_str(int number, int max_len, t_parameter parameter)
+static char	*get_malloc_int_str(int number, size_t max_len, t_parameter parameter)
 {
 	char *result;
 
@@ -18,7 +18,7 @@ static char	*get_malloc_int_str(int number, int max_len, t_parameter parameter)
 }
 
 static void get_result_str(t_sides side, int number,
-					 int num_len, char *result)
+					 size_t num_len, char *result)
 {
 	char *itoa_str;
 
@@ -45,12 +45,12 @@ static char *str_from_arg(t_parameter parameter, int number)
 {
 	t_sides sides;
 	char *result;
-	int max_len;
-	int num_len;
+	size_t max_len;
+	size_t num_len;
 
 	num_len = get_num_len(number);
-	if (num_len >= parameter.num_before_dot
-		&& num_len >= parameter.num_after_dot)
+	if ((int)num_len >= parameter.num_before_dot
+		&& (int)num_len >= parameter.num_after_dot)
 		return (ft_itoa(number));
 	if (parameter.num_before_dot > parameter.num_after_dot)
 		max_len = parameter.num_before_dot;

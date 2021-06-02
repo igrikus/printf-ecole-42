@@ -37,7 +37,7 @@ static t_sides get_side_if_no_dot(t_sides side, t_parameter parameter,
 	return (side);
 }
 
-t_sides get_sides_int(t_parameter parameter, int max_len, int arg_len)
+t_sides get_sides_int(t_parameter parameter, size_t max_len, size_t arg_len)
 {
 	t_sides side;
 

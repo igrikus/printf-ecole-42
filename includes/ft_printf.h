@@ -25,6 +25,12 @@ typedef struct	s_sides
 	size_t right;
 }				t_sides;
 
+typedef struct	s_arg
+{
+	char	*str;
+	size_t	str_len;
+}				t_arg;
+
 int ft_printf(const char *str, ...);
 size_t parse_int(const char *str, va_list list_args);
 size_t parse_str(const char *str, va_list args);
@@ -39,10 +45,10 @@ int get_num_after_dot(const char *arg_str);
 void fill_list(void *content);
 void free_content(void *content);
 char *fill_result_if_number_zero(t_parameter parameter);
-t_sides get_sides_int(t_parameter parameter, int max_len, int arg_len);
+t_sides get_sides_int(t_parameter parameter, size_t max_len, size_t arg_len);
 t_sides get_sides_str(t_parameter parameter, size_t arg_len);
 t_parameter fill_parameter(char *arg_str, va_list args);
-int get_num_len(int num);
+size_t	get_num_len(int num);
 int get_unsigned_num_len(unsigned int num);
 char	*ft_unsigned_itoa(unsigned int n);
 char	*get_malloc_result(size_t max_len);
