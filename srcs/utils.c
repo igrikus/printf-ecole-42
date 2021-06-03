@@ -30,15 +30,19 @@ void free_content(void *content)
 	free(content);
 }
 
-void fill_list(void *content)
+void fill_list(void *content, size_t content_len)
 {
 	t_list *new;
 
 	if (ft_lstsize(list_args) == 0)
+	{
 		list_args = ft_lstnew(content);
+		list_args->content_len = content_len;
+	}
 	else
 	{
 		new = ft_lstnew(content);
+		new->content_len = content_len;
 		ft_lstadd_back(&list_args, new);
 	}
 }

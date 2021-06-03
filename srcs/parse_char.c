@@ -27,11 +27,12 @@ static char *str_from_arg(t_parameter parameter, char arg)
 	result = get_malloc_result(max_len);
 	if (result == 0)
 		return (0);
+	fill_list(result, max_len);
 	if (max_len == 1)
 	{
-		*(result++) = arg;
-		*result = 0;
-		return (result - 1);
+		*result = arg;
+		*(result + 1) = 0;
+		return (result);
 	}
 	sides = get_sides_str(parameter, 1);
 	get_result_str(sides, arg, result);
@@ -40,6 +41,7 @@ static char *str_from_arg(t_parameter parameter, char arg)
 
 size_t parse_char(const char *str, va_list args)
 {
+	t_list *last;
 	t_parameter parameter;
 	char	*result;
 	char	*arg_str;
@@ -53,10 +55,7 @@ size_t parse_char(const char *str, va_list args)
 	result = str_from_arg(parameter, arg);
 	if (result == 0)
 		return (0);
-	fill_list(result);
 	free(arg_str);
-	if (arg == 0)
-		return (ft_strlen(result) + 1);
-	else
-		return (ft_strlen(result));
+	last = ft_lstlast(list_args);
+	return (last->content_len);
 }

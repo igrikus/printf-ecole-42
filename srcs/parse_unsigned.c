@@ -18,14 +18,13 @@ static void get_result_str(t_sides side, unsigned int number,
 	*result = 0;
 }
 
-static char *str_from_arg(t_parameter parameter, unsigned int number)
+static char *str_from_arg(t_parameter parameter, unsigned int number,
+						  size_t num_len)
 {
 	t_sides sides;
 	char *result;
 	size_t max_len;
-	size_t num_len;
 
-	num_len = get_unsigned_num_len(number);
 	if ((int)num_len >= parameter.num_before_dot
 		&& (int)num_len >= parameter.num_after_dot)
 		return (ft_unsigned_itoa(number));
@@ -54,19 +53,21 @@ size_t parse_unsigned(const char *str, va_list args)
 	char *result;
 	char *arg_str;
 	unsigned int number;
+	size_t num_len;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)
 		return (0);
 	parameter = fill_parameter(arg_str, args);
 	number = va_arg(args, unsigned int);
+	num_len = get_unsigned_num_len(number);
 	if (parameter.contain_dot && parameter.num_after_dot == 0 && number == 0)
 		result = fill_result_if_number_zero(parameter);
 	else
-		result = str_from_arg(parameter, number);
+		result = str_from_arg(parameter, number, num_len);
 	if (result == 0)
 		return (0);
-	fill_list(result);
+	fill_list(result, ft_strlen(result));
 	free(arg_str);
 	return (ft_strlen(result));
 }

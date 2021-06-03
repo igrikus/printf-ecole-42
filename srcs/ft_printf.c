@@ -1,13 +1,29 @@
 #include "../includes/ft_printf.h"
 
+char *concat_arg(char *result)
+{
+	char *arg;
+	size_t count;
+
+	arg = list_args->content;
+	count = 0;
+	while (count < list_args->content_len)
+	{
+		*(result + count) = *(arg + count);
+		count++;
+	}
+	result += list_args->content_len;
+	list_args = list_args->next;
+	return (result);
+}
+
 char *get_result_line(const char *str, size_t size)
 {
 	t_list *temp;
 	int arg_len;
 	char *result;
 
-	result = malloc(sizeof(char) * (size + 1));
-	ft_memset(result, 0, size + 1);
+	result = get_malloc_result(size);
 	if (result == 0)
 		return (0);
 	temp = list_args;
@@ -21,14 +37,13 @@ char *get_result_line(const char *str, size_t size)
 		else if (*str == '%')
 		{
 			arg_len = get_arg_len(str);
-			ft_strlcat(result, (const char *) temp->content, size + 1);
-			result += ft_strlen((const char *) temp->content);
-			temp = temp->next;
+			result = concat_arg(result);
 			str += arg_len;
 		}
 		else
 			*(result++) = *(str++);
 	}
+	list_args = temp;
 	*result = 0;
 	return (result - size);
 }
@@ -62,6 +77,7 @@ size_t get_arg_size(const char *str, va_list args)
 
 int ft_printf(const char *str, ...)
 {
+	size_t count;
 	size_t size;
 	va_list args;
 	char *result;
@@ -92,13 +108,15 @@ int ft_printf(const char *str, ...)
 	ft_lstclear(&list_args, free_content);
 	if (result == 0)
 		return (-1);
-	ft_putstr_fd((char *)result, 1);
+	count = 0;
+	while (count < size)
+		ft_putchar_fd(*(result + count++), 1);
 	free(result);
 	return ((int)size);
 }
 
-//int main() {
-//	ft_printf("%c", 0);
-//	write(1, "\n", 1);
-//	printf("%c", 0);
-//}
+int main() {
+	ft_printf("%c %10c", '0', '1');
+	write(1, "\n", 1);
+	printf("%c %10c", '0', '1');
+}

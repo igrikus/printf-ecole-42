@@ -25,12 +25,6 @@ typedef struct	s_sides
 	size_t right;
 }				t_sides;
 
-typedef struct	s_arg
-{
-	char	*str;
-	size_t	str_len;
-}				t_arg;
-
 int ft_printf(const char *str, ...);
 size_t parse_int(const char *str, va_list list_args);
 size_t parse_str(const char *str, va_list args);
@@ -42,7 +36,7 @@ int arg_contain_dot(const char *arg_str);
 int arg_contain_zero(const char *arg_str);
 int get_num_before_dot(const char *arg_str);
 int get_num_after_dot(const char *arg_str);
-void fill_list(void *content);
+void fill_list(void *content, size_t content_len);
 void free_content(void *content);
 char *fill_result_if_number_zero(t_parameter parameter);
 t_sides get_sides_int(t_parameter parameter, size_t max_len, size_t arg_len);

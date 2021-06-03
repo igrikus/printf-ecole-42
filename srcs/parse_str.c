@@ -44,15 +44,13 @@ static void get_result_str(t_sides sides, char *trim_str,
 	*result = 0;
 }
 
-static char *str_from_arg(t_parameter parameter, char *arg)
+static char *str_from_arg(t_parameter parameter, char *arg, size_t str_len)
 {
 	t_sides sides;
 	char *result;
 	char *trim_str;
 	size_t max_len;
-	size_t str_len;
 
-	str_len = ft_strlen(arg);
 	trim_str = trim_arg_str(parameter, arg, str_len);
 	if (str_len < ft_strlen(trim_str))
 		max_len = str_len;
@@ -80,6 +78,7 @@ size_t parse_str(const char *str, va_list args)
 	char	*result;
 	char	*arg_str;
 	char	*arg;
+	size_t str_len;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)
@@ -88,10 +87,11 @@ size_t parse_str(const char *str, va_list args)
 	arg = va_arg(args, char *);
 	if (arg == 0)
 		arg = "(null)";
-	result = str_from_arg(parameter, arg);
+	str_len = ft_strlen(arg);
+	result = str_from_arg(parameter, arg, str_len);
 	if (result == 0)
 		return (0);
-	fill_list(result);
+	fill_list(result, ft_strlen(result));
 	free(arg_str);
 	return (ft_strlen(result));
 }
