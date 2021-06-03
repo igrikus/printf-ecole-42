@@ -27,10 +27,7 @@ char	*get_malloc_result(size_t max_len)
 
 void free_content(void *content)
 {
-	t_arg *arg;
-
-	arg = (t_arg *) content;
-	free(arg->str);
+	free(content);
 }
 
 void fill_list(void *content, size_t content_len)
