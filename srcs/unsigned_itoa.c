@@ -40,11 +40,7 @@ char	*ft_unsigned_itoa(unsigned int n)
 		*(result + 1) = 0;
 		return (result);
 	}
-	if (n < 0)
-		*(result++) = '-';
 	make_all_job(result, n, size);
 	*(result + size) = 0;
-	if (n < 0)
-		result--;
 	return (result);
 }

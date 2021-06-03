@@ -36,13 +36,6 @@ static char *str_from_arg(t_parameter parameter, unsigned int number,
 	if (result == 0)
 		return (0);
 	sides = get_sides_int(parameter, max_len, num_len);
-	if (number < 0 && sides.left)
-		sides.left--;
-	else if (number < 0 && sides.right)
-		sides.right--;
-	else if (number < 0 && sides.null_left && !parameter.contain_dot
-			 && !sides.left && !sides.right)
-		sides.null_left--;
 	get_result_str(sides, number, num_len, result);
 	return (result);
 }
