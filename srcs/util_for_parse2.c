@@ -1,10 +1,10 @@
 #include "../includes/ft_printf.h"
 
-int flag_is_small_hex(const char *arg_str)
+int flag_is_upper_hex(const char *arg_str)
 {
 	while (*arg_str)
 	{
-		if (*arg_str == 'x')
+		if (*arg_str == 'X')
 			return (YES);
 		arg_str++;
 	}

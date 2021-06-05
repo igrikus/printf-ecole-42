@@ -1,29 +1,27 @@
 #include "../includes/ft_printf.h"
 
-char	*get_hex_from_decimal(unsigned int nbr, char *base, char *result)
+static char	*get_hex_from_decimal(unsigned int nbr, char *base, char *result)
 {
 	unsigned int modulo;
 
 	if (nbr != 0 && (nbr / 16 != 0))
 		result = get_hex_from_decimal(nbr / 16, base, result);
 	modulo = nbr % 16;
-	if (modulo < 0)
-		modulo *= -1;
 	*result = base[modulo];
 	return (result + 1);
 }
 
-char *fill_hex_str(char *arg_str, unsigned int number, size_t hex_len)
+static char *fill_hex_str(char *arg_str, unsigned int number, size_t hex_len)
 {
 	char *hex_str;
 
 	hex_str = get_malloc_result(hex_len);
 	if (hex_str == 0)
 		return (0);
-	if (flag_is_small_hex(arg_str))
-		get_hex_from_decimal(number, "0123456789abcdef", hex_str);
-	else
+	if (flag_is_upper_hex(arg_str))
 		get_hex_from_decimal(number, "0123456789ABCDEF", hex_str);
+	else
+		get_hex_from_decimal(number, "0123456789abcdef", hex_str);
 	return (hex_str);
 }
 

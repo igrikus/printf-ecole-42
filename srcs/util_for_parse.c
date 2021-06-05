@@ -16,7 +16,7 @@ int get_arg_len(const char *str)
 	return (len);
 }
 
-size_t	get_hex_len(unsigned int num)
+size_t	get_hex_len(unsigned long num)
 {
 	int	len;
 
