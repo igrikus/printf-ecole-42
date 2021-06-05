@@ -67,8 +67,8 @@ size_t get_arg_size(const char *str, va_list args)
 //			return (parse_pointer(str, args));
 		else if (symbol == 'u')
 			return (parse_unsigned(str, args));
-//		else if (symbol == 'x' || symbol == 'X')
-//			return (parse_hex(str, args));
+		else if (symbol == 'x' || symbol == 'X')
+			return (parse_hex(str, args));
 		i++;
 		symbol = *(str + i);
 	}
@@ -115,8 +115,8 @@ int ft_printf(const char *str, ...)
 	return ((int)size);
 }
 
-int main() {
-	ft_printf("%c %10c", '0', '1');
-	write(1, "\n", 1);
-	printf("%c %10c", '0', '1');
-}
+//int main() {
+//	ft_printf("%2x", 0);
+//	write(1, "\n", 1);
+//	printf("%2x", 0);
+//}

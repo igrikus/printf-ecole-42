@@ -30,6 +30,7 @@ size_t parse_int(const char *str, va_list list_args);
 size_t parse_str(const char *str, va_list args);
 size_t parse_unsigned(const char *str, va_list args);
 size_t parse_char(const char *str, va_list args);
+size_t parse_hex(const char *str, va_list args);
 int get_arg_len(const char *str);
 int arg_contain_minus(const char *arg_str);
 int arg_contain_dot(const char *arg_str);
@@ -43,9 +44,11 @@ t_sides get_sides_int(t_parameter parameter, size_t max_len, size_t arg_len);
 t_sides get_sides_str(t_parameter parameter, size_t arg_len);
 t_parameter fill_parameter(char *arg_str, va_list args);
 size_t	get_num_len(int num);
+size_t	get_hex_len(unsigned int nbr);
 int get_unsigned_num_len(unsigned int num);
 char	*ft_unsigned_itoa(unsigned int n);
 char	*get_malloc_result(size_t max_len);
+int flag_is_small_hex(const char *arg_str);
 
 t_list *list_args;
 

@@ -1,19 +1,14 @@
 #include "../includes/ft_printf.h"
 
-int get_arg_len(const char *str)
+int flag_is_small_hex(const char *arg_str)
 {
-	char *flags = "cspdiuxX";
-	int len;
-
-	len = 1;
-	str++;
-	while (*str && (*str > 13 || *str < 9) && *str != ' '
-	&& ft_memchr(flags, *(str - 1), 8) == 0)
+	while (*arg_str)
 	{
-		str++;
-		len++;
+		if (*arg_str == 'x')
+			return (YES);
+		arg_str++;
 	}
-	return (len);
+	return (NO);
 }
 
 int get_unsigned_num_len(unsigned int num)
