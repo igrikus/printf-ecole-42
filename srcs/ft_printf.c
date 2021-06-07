@@ -29,12 +29,7 @@ char *get_result_line(const char *str, size_t size)
 	temp = list_args;
 	while (*str)
 	{
-		if (*str == '%' && *(str + 1) == '%')
-		{
-			*(result++) = '%';
-			str += 2;
-		}
-		else if (*str == '%')
+		if (*str == '%')
 		{
 			arg_len = get_arg_len(str);
 			result = concat_arg(result);
@@ -53,10 +48,11 @@ size_t get_arg_size(const char *str, va_list args)
 	int	i;
 	char symbol;
 
-	symbol = *str;
-	i = 0;
+	i = 1;
+	symbol = *(str + i);
 	while (symbol)
 	{
+
 		if (symbol == 'd' || symbol == 'i')
 			return (parse_int(str, args));
 		else if (symbol == 's')
@@ -69,6 +65,8 @@ size_t get_arg_size(const char *str, va_list args)
 			return (parse_unsigned(str, args));
 		else if (symbol == 'x' || symbol == 'X')
 			return (parse_hex(str, args));
+		else if (symbol == '%')
+			return (parse_percent(str, args));
 		i++;
 		symbol = *(str + i);
 	}
@@ -92,11 +90,6 @@ int ft_printf(const char *str, ...)
 			size++;
 			str++;
 		}
-		else if (*str == '%' && *(str + 1) == '%')
-		{
-			size++;
-			str += 2;
-		}
 		else
 		{
 			size += get_arg_size(str, args);
@@ -115,8 +108,9 @@ int ft_printf(const char *str, ...)
 	return ((int)size);
 }
 
-//int main() {
-//	ft_printf("%5p", (void *) 1);
-//	write(1, "\n", 1);
-//	printf("%5p", (void *) 1);
-//}
+int main() {
+	int i = ft_printf("%s!", "Ceci n'est toujours pas un exercice !");
+	write(1, "\n", 1);
+	int j = printf("%s!", "Ceci n'est toujours pas un exercice !");
+	printf("\n%d %d", i, j);
+}

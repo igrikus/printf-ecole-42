@@ -1,5 +1,19 @@
 #include "../includes/ft_printf.h"
 
+size_t	get_hex_len(unsigned long num)
+{
+	int	len;
+
+	len = 1;
+	while (num != 0)
+	{
+		num /= 16;
+		if (num != 0)
+			len++;
+	}
+	return (len);
+}
+
 size_t	get_num_len(int num)
 {
 	int	len;

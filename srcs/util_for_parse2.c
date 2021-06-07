@@ -1,5 +1,23 @@
 #include "../includes/ft_printf.h"
 
+int get_arg_len(const char *str)
+{
+	char *flags = "cspdiuxX";
+	int len;
+
+	len = 1;
+	str++;
+	while (*str && (*str > 13 || *str < 9) && *str != ' '
+		   && ft_memchr(flags, *(str - 1), 8) == 0)
+	{
+		len++;
+		str++;
+		if (*(str - 1) == '%')
+			break;
+	}
+	return (len);
+}
+
 int flag_is_upper_hex(const char *arg_str)
 {
 	while (*arg_str)

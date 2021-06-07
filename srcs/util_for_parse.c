@@ -1,33 +1,14 @@
 #include "../includes/ft_printf.h"
 
-int get_arg_len(const char *str)
+int arg_contain_asterisk(const char *arg_str)
 {
-	char *flags = "cspdiuxX";
-	int len;
-
-	len = 1;
-	str++;
-	while (*str && (*str > 13 || *str < 9) && *str != ' '
-		   && ft_memchr(flags, *(str - 1), 8) == 0)
+	while(*arg_str)
 	{
-		str++;
-		len++;
+		if (*arg_str == '*')
+			return (YES);
+		arg_str++;
 	}
-	return (len);
-}
-
-size_t	get_hex_len(unsigned long num)
-{
-	int	len;
-
-	len = 1;
-	while (num != 0)
-	{
-		num /= 16;
-		if (num != 0)
-			len++;
-	}
-	return (len);
+	return (NO);
 }
 
 int arg_contain_minus(const char *arg_str)
