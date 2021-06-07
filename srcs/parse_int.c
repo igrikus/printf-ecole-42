@@ -62,7 +62,8 @@ static char *str_from_arg(t_parameter parameter, int number, size_t num_len)
 		sides.left--;
 	else if (number < 0 && sides.right)
 		sides.right--;
-	else if (number < 0 && sides.null_left && !parameter.contain_dot
+	else if (number < 0 && sides.null_left &&
+	(!parameter.contain_dot || parameter.num_after_dot < 0)
 	&& !sides.left && !sides.right)
 		sides.null_left--;
 	get_result_str(sides, number, num_len, result);

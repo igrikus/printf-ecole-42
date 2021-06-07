@@ -16,7 +16,13 @@ static t_sides get_side_if_contain_dot(t_sides side, t_parameter parameter,
 			else
 				side.left = parameter.num_before_dot - arg_len;
 	}
-	side.null_left = max_len - arg_len - side.right - side.left;
+	if (parameter.num_after_dot < 0 && side.right == 0 && parameter.contain_zero)
+	{
+		side.left = 0;
+		side.null_left = max_len - arg_len;
+	}
+	else
+		side.null_left = max_len - arg_len - side.right - side.left;
 	return (side);
 }
 

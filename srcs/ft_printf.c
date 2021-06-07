@@ -1,10 +1,15 @@
 #include "../includes/ft_printf.h"
 
-char *concat_arg(char *result)
+char *concat_arg(char *result, char *temp_for_free)
 {
 	char *arg;
 	size_t count;
 
+	if (list_args == 0)
+	{
+		free(temp_for_free);
+		return (0);
+	}
 	arg = list_args->content;
 	count = 0;
 	while (count < list_args->content_len)
@@ -22,22 +27,24 @@ char *get_result_line(const char *str, size_t size)
 	t_list *temp;
 	int arg_len;
 	char *result;
+	char *temp_for_free;
 
 	result = get_malloc_result(size);
 	if (result == 0)
 		return (0);
+	temp_for_free = result;
 	temp = list_args;
 	while (*str)
-	{
 		if (*str == '%')
 		{
 			arg_len = get_arg_len(str);
-			result = concat_arg(result);
+			result = concat_arg(result, temp_for_free);
+			if (result == 0)
+				return (0);
 			str += arg_len;
 		}
 		else
 			*(result++) = *(str++);
-	}
 	list_args = temp;
 	*result = 0;
 	return (result - size);
@@ -70,7 +77,7 @@ size_t get_arg_size(const char *str, va_list args)
 		i++;
 		symbol = *(str + i);
 	}
-	return (0);
+	return (i);
 }
 
 int ft_printf(const char *str, ...)
