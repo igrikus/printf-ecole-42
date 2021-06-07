@@ -59,7 +59,6 @@ size_t get_arg_size(const char *str, va_list args)
 	symbol = *(str + i);
 	while (symbol)
 	{
-
 		if (symbol == 'd' || symbol == 'i')
 			return (parse_int(str, args));
 		else if (symbol == 's')
