@@ -114,9 +114,9 @@ int ft_printf(const char *str, ...)
 	return ((int)size);
 }
 
-int main() {
-	int i = ft_printf("%s!", "Ceci n'est toujours pas un exercice !");
-	write(1, "\n", 1);
-	int j = printf("%s!", "Ceci n'est toujours pas un exercice !");
-	printf("\n%d %d", i, j);
-}
+//int main() {
+//	int i = ft_printf("%48lc", 'y');
+//	write(1, "\n", 1);
+//	int j = printf("%48lc", 'y');
+//	printf("\n%d %d", i, j);
+//}

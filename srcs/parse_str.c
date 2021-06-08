@@ -52,7 +52,7 @@ static char *str_from_arg(t_parameter parameter, char *arg, size_t str_len)
 	size_t max_len;
 
 	trim_str = trim_arg_str(parameter, arg, str_len);
-	if (str_len <= ft_strlen(trim_str))
+	if (str_len >= (size_t) parameter.num_before_dot)
 		max_len = str_len;
 	else
 		max_len = parameter.num_before_dot;
