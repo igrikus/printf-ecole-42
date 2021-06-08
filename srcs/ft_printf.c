@@ -1,24 +1,24 @@
 #include "../includes/ft_printf.h"
 
-char *concat_arg(char *result, char *temp_for_free)
+char	*concat_arg(char *result, char *temp_for_free)
 {
 	char *arg;
 	size_t count;
 
-	if (list_args == 0)
+	if (g_list_args == 0)
 	{
 		free(temp_for_free);
 		return (0);
 	}
-	arg = list_args->content;
+	arg = g_list_args->content;
 	count = 0;
-	while (count < list_args->content_len)
+	while (count < g_list_args->content_len)
 	{
 		*(result + count) = *(arg + count);
 		count++;
 	}
-	result += list_args->content_len;
-	list_args = list_args->next;
+	result += g_list_args->content_len;
+	g_list_args = g_list_args->next;
 	return (result);
 }
 
@@ -33,7 +33,7 @@ char *get_result_line(const char *str, size_t size)
 	if (result == 0)
 		return (0);
 	temp_for_free = result;
-	temp = list_args;
+	temp = g_list_args;
 	while (*str)
 		if (*str == '%')
 		{
@@ -45,7 +45,7 @@ char *get_result_line(const char *str, size_t size)
 		}
 		else
 			*(result++) = *(str++);
-	list_args = temp;
+	g_list_args = temp;
 	*result = 0;
 	return (result - size);
 }
@@ -104,7 +104,7 @@ int ft_printf(const char *str, ...)
 	}
 	va_end(args);
 	result = get_result_line(result, size);
-	ft_lstclear(&list_args, free_content);
+	ft_lstclear(&g_list_args, free_content);
 	if (result == 0)
 		return (-1);
 	count = 0;
@@ -113,10 +113,3 @@ int ft_printf(const char *str, ...)
 	free(result);
 	return ((int)size);
 }
-
-//int main() {
-//	int i = ft_printf("%s", "hello my dear shit");
-//	write(1, "\n", 1);
-//	int j = printf("%s", "hello my dear shit");
-//	printf("\n%d %d", i, j);
-//}

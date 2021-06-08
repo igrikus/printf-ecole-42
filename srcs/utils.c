@@ -48,15 +48,15 @@ void fill_list(void *content, size_t content_len)
 {
 	t_list *new;
 
-	if (ft_lstsize(list_args) == 0)
+	if (ft_lstsize(g_list_args) == 0)
 	{
-		list_args = ft_lstnew(content);
-		list_args->content_len = content_len;
+		g_list_args = ft_lstnew(content);
+		g_list_args->content_len = content_len;
 	}
 	else
 	{
 		new = ft_lstnew(content);
 		new->content_len = content_len;
-		ft_lstadd_back(&list_args, new);
+		ft_lstadd_back(&g_list_args, new);
 	}
 }

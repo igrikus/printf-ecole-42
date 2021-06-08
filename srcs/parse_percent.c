@@ -59,6 +59,6 @@ size_t parse_percent(const char *str, va_list args)
 	if (result == 0)
 		return (0);
 	free(arg_str);
-	last = ft_lstlast(list_args);
+	last = ft_lstlast(g_list_args);
 	return (last->content_len);
 }
