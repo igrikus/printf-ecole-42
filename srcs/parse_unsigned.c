@@ -1,6 +1,6 @@
 #include "../includes/ft_printf.h"
 
-static void get_result_str(t_sides side, unsigned int number,
+static int get_result_str(t_sides side, unsigned int number,
 						   size_t num_len, char *result)
 {
 	char *itoa_str;
@@ -10,24 +10,33 @@ static void get_result_str(t_sides side, unsigned int number,
 	ft_memset(result, '0', side.null_left);
 	result += side.null_left;
 	itoa_str = ft_unsigned_itoa(number);
+	if (itoa_str == 0)
+		return (-1);
 	ft_strlcat(result, itoa_str, num_len + 1);
 	free(itoa_str);
 	result += num_len;
 	ft_memset(result, ' ', side.right);
 	result += side.right;
 	*result = 0;
+	return (0);
 }
 
 static char *str_from_arg(t_parameter parameter, unsigned int number,
 						  size_t num_len)
 {
 	t_sides sides;
+	char *itoa_str;
 	char *result;
 	size_t max_len;
 
 	if ((int)num_len >= parameter.num_before_dot
 		&& (int)num_len >= parameter.num_after_dot)
-		return (ft_unsigned_itoa(number));
+	{
+		itoa_str = ft_unsigned_itoa(number);
+		if (itoa_str)
+			return (itoa_str);
+		else return (0);
+	}
 	if (parameter.num_before_dot > parameter.num_after_dot)
 		max_len = parameter.num_before_dot;
 	else
@@ -36,8 +45,10 @@ static char *str_from_arg(t_parameter parameter, unsigned int number,
 	if (result == 0)
 		return (0);
 	sides = get_sides_int(parameter, max_len, num_len);
-	get_result_str(sides, number, num_len, result);
-	return (result);
+	if (get_result_str(sides, number, num_len, result) == 0)
+		return (result);
+	else
+		return (0);
 }
 
 size_t parse_unsigned(const char *str, va_list args)

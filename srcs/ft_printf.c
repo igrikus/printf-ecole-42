@@ -115,8 +115,8 @@ int ft_printf(const char *str, ...)
 }
 
 //int main() {
-//	int i = ft_printf("%48lc", 'y');
+//	int i = ft_printf("%s", "hello my dear shit");
 //	write(1, "\n", 1);
-//	int j = printf("%48lc", 'y');
+//	int j = printf("%s", "hello my dear shit");
 //	printf("\n%d %d", i, j);
 //}

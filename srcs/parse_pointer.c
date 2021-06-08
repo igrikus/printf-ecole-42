@@ -21,14 +21,17 @@ static char *fill_hex_pointer(char *arg_str, unsigned long number,
 		return (0);
 	*hex_str++ = '0';
 	*hex_str++ = 'x';
-	if (flag_is_upper_hex(arg_str))
-		get_hex_from_decimal(number, "0123456789ABCDEF", hex_str);
-	else
-		get_hex_from_decimal(number, "0123456789abcdef", hex_str);
+	if (number != 0 || !arg_contain_dot(arg_str) || get_num_after_dot(arg_str))
+	{
+		if (flag_is_upper_hex(arg_str))
+			get_hex_from_decimal(number, "0123456789ABCDEF", hex_str);
+		else
+			get_hex_from_decimal(number, "0123456789abcdef", hex_str);
+	}
 	return (hex_str - 2);
 }
 
-static void get_result_str(t_sides side, char *arg_str,
+static int get_result_str(t_sides side, char *arg_str,
 						   unsigned long number, char *result)
 {
 	char *hex_str;
@@ -37,7 +40,7 @@ static void get_result_str(t_sides side, char *arg_str,
 	hex_len = get_hex_len(number) + 2;
 	hex_str = fill_hex_pointer(arg_str, number, hex_len);
 	if (hex_str == 0)
-		return ;
+		return (-1);
 	ft_memset(result, ' ', side.left);
 	result += side.left;
 	ft_memset(result, '0', side.null_left);
@@ -48,6 +51,7 @@ static void get_result_str(t_sides side, char *arg_str,
 	ft_memset(result, ' ', side.right);
 	result += side.right;
 	*result = 0;
+	return (0);
 }
 
 static char *str_from_arg(t_parameter parameter, unsigned long number,
@@ -67,9 +71,12 @@ static char *str_from_arg(t_parameter parameter, unsigned long number,
 	result = get_malloc_result(max_len);
 	if (result == 0)
 		return (0);
+	if (number == 0 && parameter.contain_dot)
+		num_len--;
 	sides = get_sides_int(parameter, max_len, num_len);
-	get_result_str(sides, arg_str, number, result);
-	return (result);
+	if (get_result_str(sides, arg_str, number, result) == 0)
+		return (result);
+	return (0);
 }
 
 size_t parse_pointer(const char *str, va_list args)
@@ -86,10 +93,7 @@ size_t parse_pointer(const char *str, va_list args)
 	parameter = fill_parameter(arg_str, args);
 	number = va_arg(args, unsigned long);
 	num_len = get_hex_len(number) + 2;
-	if (parameter.contain_dot && parameter.num_after_dot == 0 && number == 0)
-		result = fill_result_if_number_zero(parameter);
-	else
-		result = str_from_arg(parameter, number, num_len, arg_str);
+	result = str_from_arg(parameter, number, num_len, arg_str);
 	if (result == 0)
 		return (0);
 	fill_list(result, ft_strlen(result));

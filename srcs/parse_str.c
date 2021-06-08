@@ -1,31 +1,29 @@
 #include "../includes/ft_printf.h"
 
-char *trim_arg_str(t_parameter parameter, char *arg, size_t arg_len)
+char *trim_arg_str(t_parameter parameter, const char *arg, size_t arg_len)
 {
 	char *result;
 	int count;
 
-	count = 0;
+	count = -1;
 	if (parameter.contain_dot && parameter.num_after_dot >= 0)
 	{
-		result = malloc(sizeof(char) * (parameter.num_before_dot + 1));
-		while (*arg && count < parameter.num_after_dot)
-		{
-			*(result++) = *(arg++);
-			count++;
-		}
+		result = get_malloc_result(parameter.num_before_dot);
+		if (result == 0)
+			return (0);
+		while (*arg && ++count < parameter.num_after_dot)
+			result[count] = arg[count];
 	}
 	else
 	{
-		result = malloc(sizeof(char) * (arg_len + 1));
-		while ((size_t) count < arg_len)
-		{
-			*(result++) = *(arg++);
-			count++;
-		}
+		result = get_malloc_result(arg_len);
+		if (result == 0)
+			return (0);
+		while ((size_t) ++count < arg_len)
+			result[count] = arg[count];
 	}
-	*result = 0;
-	return (result - count);
+	result[count] = 0;
+	return (result);
 }
 
 static void get_result_str(t_sides sides, char *trim_str,
@@ -46,12 +44,13 @@ static void get_result_str(t_sides sides, char *trim_str,
 
 static char *str_from_arg(t_parameter parameter, char *arg, size_t str_len)
 {
-	t_sides sides;
 	char *result;
 	char *trim_str;
 	size_t max_len;
 
 	trim_str = trim_arg_str(parameter, arg, str_len);
+	if (trim_str == 0)
+		return (0);
 	if (str_len >= (size_t) parameter.num_before_dot)
 		max_len = str_len;
 	else
@@ -66,8 +65,7 @@ static char *str_from_arg(t_parameter parameter, char *arg, size_t str_len)
 		free(trim_str);
 		return (result);
 	}
-	sides = get_sides_str(parameter, str_len);
-	get_result_str(sides, trim_str, str_len, result);
+	get_result_str(get_sides_str(parameter, str_len), trim_str, str_len, result);
 	free(trim_str);
 	return (result);
 }

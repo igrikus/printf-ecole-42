@@ -4,7 +4,7 @@ static char	*get_malloc_array(int size)
 {
 	char	*array;
 
-	array = malloc(size + 1);
+	array = get_malloc_result(size);
 	if (array == 0)
 		return (0);
 	return (array);

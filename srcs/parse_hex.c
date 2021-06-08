@@ -25,7 +25,7 @@ static char *fill_hex_str(char *arg_str, unsigned int number, size_t hex_len)
 	return (hex_str);
 }
 
-static void get_result_str(t_sides side, char *arg_str,
+static int get_result_str(t_sides side, char *arg_str,
 						   unsigned int number, char *result)
 {
 	char *hex_str;
@@ -34,7 +34,7 @@ static void get_result_str(t_sides side, char *arg_str,
 	hex_len = get_hex_len(number);
 	hex_str = fill_hex_str(arg_str, number, hex_len);
 	if (hex_str == 0)
-		return ;
+		return (-1);
 	ft_memset(result, ' ', side.left);
 	result += side.left;
 	ft_memset(result, '0', side.null_left);
@@ -45,6 +45,7 @@ static void get_result_str(t_sides side, char *arg_str,
 	ft_memset(result, ' ', side.right);
 	result += side.right;
 	*result = 0;
+	return (0);
 }
 
 static char *str_from_arg(t_parameter parameter, unsigned int number,
@@ -65,8 +66,10 @@ static char *str_from_arg(t_parameter parameter, unsigned int number,
 	if (result == 0)
 		return (0);
 	sides = get_sides_int(parameter, max_len, num_len);
-	get_result_str(sides, arg_str, number, result);
-	return (result);
+	if (get_result_str(sides, arg_str, number, result) == 0)
+		return (result);
+	else
+		return (0);
 }
 
 size_t parse_hex(const char *str, va_list args)
