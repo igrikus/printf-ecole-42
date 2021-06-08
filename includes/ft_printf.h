@@ -53,6 +53,7 @@ int			get_unsigned_num_len(unsigned int num);
 char		*ft_unsigned_itoa(unsigned int n);
 char		*get_malloc_result(size_t max_len);
 int			flag_is_upper_hex(const char *arg_str);
+void		end_args_and_free_list(va_list args);
 
 t_list	*g_list_args;
 

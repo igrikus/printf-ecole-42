@@ -1,5 +1,11 @@
 #include "../includes/ft_printf.h"
 
+void end_args_and_free_list(va_list args)
+{
+	va_end(args);
+	ft_lstclear(&g_list_args, free_content);
+}
+
 static void get_result_str(t_sides sides, char *result)
 {
 	size_t count;
