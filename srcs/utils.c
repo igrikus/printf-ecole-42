@@ -30,7 +30,7 @@ size_t	get_num_len(int num)
 
 char	*get_malloc_result(size_t max_len)
 {
-	char *result;
+	char	*result;
 
 	result = malloc(sizeof(char) * (max_len + 1));
 	if (result == 0)
@@ -39,14 +39,14 @@ char	*get_malloc_result(size_t max_len)
 	return (result);
 }
 
-void free_content(void *content)
+void	free_content(void *content)
 {
 	free(content);
 }
 
-void fill_list(void *content, size_t content_len)
+void	fill_list(void *content, size_t content_len)
 {
-	t_list *new;
+	t_list	*new;
 
 	if (ft_lstsize(g_list_args) == 0)
 	{

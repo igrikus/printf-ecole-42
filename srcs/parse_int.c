@@ -1,8 +1,9 @@
 #include "../includes/ft_printf.h"
 
-static char	*get_malloc_int_str(int number, size_t max_len, t_parameter parameter)
+static char	*get_malloc_int_str(int number, size_t max_len,
+								t_parameter parameter)
 {
-	char *result;
+	char	*result;
 
 	if (number < 0 && parameter.num_before_dot <= parameter.num_after_dot)
 		result = malloc(sizeof(char) * (max_len + 2));
@@ -17,10 +18,10 @@ static char	*get_malloc_int_str(int number, size_t max_len, t_parameter paramete
 	return (result);
 }
 
-static void get_result_str(t_sides side, int number,
+static void	get_result_str(t_sides side, int number,
 					 size_t num_len, char *result)
 {
-	char *itoa_str;
+	char	*itoa_str;
 
 	ft_memset(result, ' ', side.left);
 	result += side.left;
@@ -41,11 +42,11 @@ static void get_result_str(t_sides side, int number,
 	*result = 0;
 }
 
-static char *str_from_arg(t_parameter parameter, int number, size_t num_len)
+static char	*str_from_arg(t_parameter parameter, int number, size_t num_len)
 {
-	t_sides sides;
-	char *result;
-	size_t max_len;
+	t_sides	sides;
+	char	*result;
+	size_t	max_len;
 
 	if ((int)num_len >= parameter.num_before_dot
 		&& (int)num_len >= parameter.num_after_dot)
@@ -62,17 +63,17 @@ static char *str_from_arg(t_parameter parameter, int number, size_t num_len)
 		sides.left--;
 	else if (number < 0 && sides.right)
 		sides.right--;
-	else if (number < 0 && sides.null_left &&
-	(!parameter.contain_dot || parameter.num_after_dot < 0)
-	&& !sides.left && !sides.right)
+	else if (number < 0 && sides.null_left
+		&& (!parameter.contain_dot || parameter.num_after_dot < 0)
+		&& !sides.left && !sides.right)
 		sides.null_left--;
 	get_result_str(sides, number, num_len, result);
 	return (result);
 }
 
-char *fill_result_if_number_zero(t_parameter parameter)
+char	*fill_result_if_number_zero(t_parameter parameter)
 {
-	char *result;
+	char	*result;
 
 	if (parameter.num_before_dot == 0)
 	{
@@ -88,13 +89,13 @@ char *fill_result_if_number_zero(t_parameter parameter)
 	return (result);
 }
 
-size_t parse_int(const char *str, va_list args)
+size_t	parse_int(const char *str, va_list args)
 {
-	t_parameter parameter;
-	char *result;
-	char *arg_str;
-	int number;
-	size_t num_len;
+	t_parameter	parameter;
+	char		*result;
+	char		*arg_str;
+	int			number;
+	size_t		num_len;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)

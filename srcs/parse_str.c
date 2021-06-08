@@ -1,9 +1,9 @@
 #include "../includes/ft_printf.h"
 
-char *trim_arg_str(t_parameter parameter, const char *arg, size_t arg_len)
+char	*trim_arg_str(t_parameter parameter, const char *arg, size_t arg_len)
 {
-	char *result;
-	int count;
+	char	*result;
+	int		count;
 
 	count = -1;
 	if (parameter.contain_dot && parameter.num_after_dot >= 0)
@@ -19,17 +19,17 @@ char *trim_arg_str(t_parameter parameter, const char *arg, size_t arg_len)
 		result = get_malloc_result(arg_len);
 		if (result == 0)
 			return (0);
-		while ((size_t) ++count < arg_len)
+		while ((size_t)++count < arg_len)
 			result[count] = arg[count];
 	}
 	result[count] = 0;
 	return (result);
 }
 
-static void get_result_str(t_sides sides, char *trim_str,
+static void	get_result_str(t_sides sides, char *trim_str,
 						   size_t trim_str_len, char *result)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	while (count++ < sides.left)
@@ -42,11 +42,11 @@ static void get_result_str(t_sides sides, char *trim_str,
 	*result = 0;
 }
 
-static char *str_from_arg(t_parameter parameter, char *arg, size_t str_len)
+static char	*str_from_arg(t_parameter parameter, char *arg, size_t str_len)
 {
-	char *result;
-	char *trim_str;
-	size_t max_len;
+	char	*result;
+	char	*trim_str;
+	size_t	max_len;
 
 	trim_str = trim_arg_str(parameter, arg, str_len);
 	if (trim_str == 0)
@@ -65,18 +65,19 @@ static char *str_from_arg(t_parameter parameter, char *arg, size_t str_len)
 		free(trim_str);
 		return (result);
 	}
-	get_result_str(get_sides_str(parameter, str_len), trim_str, str_len, result);
+	get_result_str(get_sides_str(parameter, str_len),
+		trim_str, str_len, result);
 	free(trim_str);
 	return (result);
 }
 
-size_t parse_str(const char *str, va_list args)
+size_t	parse_str(const char *str, va_list args)
 {
-	t_parameter parameter;
-	char	*result;
-	char	*arg_str;
-	char	*arg;
-	size_t str_len;
+	t_parameter	parameter;
+	char		*result;
+	char		*arg_str;
+	char		*arg;
+	size_t		str_len;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)

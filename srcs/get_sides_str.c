@@ -1,8 +1,8 @@
 #include "../includes/ft_printf.h"
 
-t_sides get_sides_str(t_parameter parameter, size_t arg_len)
+t_sides	get_sides_str(t_parameter parameter, size_t arg_len)
 {
-	t_sides side;
+	t_sides	side;
 
 	side.left = 0;
 	side.null_left = 0;

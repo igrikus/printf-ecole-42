@@ -1,8 +1,8 @@
 #include "../includes/ft_printf.h"
 
-int arg_contain_asterisk(const char *arg_str)
+int	arg_contain_asterisk(const char *arg_str)
 {
-	while(*arg_str)
+	while (*arg_str)
 	{
 		if (*arg_str == '*')
 			return (YES);
@@ -11,9 +11,9 @@ int arg_contain_asterisk(const char *arg_str)
 	return (NO);
 }
 
-int arg_contain_minus(const char *arg_str)
+int	arg_contain_minus(const char *arg_str)
 {
-	while(*arg_str)
+	while (*arg_str)
 	{
 		if (*arg_str == '-')
 			return (YES);
@@ -22,9 +22,9 @@ int arg_contain_minus(const char *arg_str)
 	return (NO);
 }
 
-int arg_contain_dot(const char *arg_str)
+int	arg_contain_dot(const char *arg_str)
 {
-	while(*arg_str)
+	while (*arg_str)
 	{
 		if (*arg_str == '.')
 			return (YES);
@@ -33,9 +33,9 @@ int arg_contain_dot(const char *arg_str)
 	return (NO);
 }
 
-int arg_contain_zero(const char *arg_str)
+int	arg_contain_zero(const char *arg_str)
 {
-	while(*arg_str)
+	while (*arg_str)
 	{
 		if (ft_isdigit(*arg_str))
 		{
@@ -49,9 +49,9 @@ int arg_contain_zero(const char *arg_str)
 	return (NO);
 }
 
-t_parameter fill_parameter(char *arg_str, va_list args)
+t_parameter	fill_parameter(char *arg_str, va_list args)
 {
-	t_parameter parameter;
+	t_parameter	parameter;
 
 	parameter.contain_dot = 0;
 	parameter.contain_minus = 0;
@@ -70,7 +70,8 @@ t_parameter fill_parameter(char *arg_str, va_list args)
 		parameter.contain_minus = YES;
 		parameter.num_before_dot *= -1;
 	}
-	if ((parameter.contain_dot = arg_contain_dot(arg_str)))
+	parameter.contain_dot = arg_contain_dot(arg_str);
+	if (parameter.contain_dot)
 		parameter.num_after_dot = get_num_after_dot(arg_str);
 	if (parameter.num_after_dot == ASTERISK)
 		parameter.num_after_dot = va_arg(args, int);

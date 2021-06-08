@@ -1,8 +1,8 @@
 #include "../includes/ft_printf.h"
 
-static void get_result_str(t_sides sides, char arg, char *result)
+static void	get_result_str(t_sides sides, char arg, char *result)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	while (count++ < sides.left)
@@ -14,11 +14,11 @@ static void get_result_str(t_sides sides, char arg, char *result)
 	*result = 0;
 }
 
-static char *str_from_arg(t_parameter parameter, char arg)
+static char	*str_from_arg(t_parameter parameter, char arg)
 {
-	t_sides sides;
-	char *result;
-	size_t max_len;
+	t_sides	sides;
+	char	*result;
+	size_t	max_len;
 
 	if (parameter.num_before_dot)
 		max_len = parameter.num_before_dot;
@@ -39,13 +39,13 @@ static char *str_from_arg(t_parameter parameter, char arg)
 	return (result);
 }
 
-size_t parse_char(const char *str, va_list args)
+size_t	parse_char(const char *str, va_list args)
 {
-	t_list *last;
-	t_parameter parameter;
-	char	*result;
-	char	*arg_str;
-	char	arg;
+	t_list		*last;
+	t_parameter	parameter;
+	char		*result;
+	char		*arg_str;
+	char		arg;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)

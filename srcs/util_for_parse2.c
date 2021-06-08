@@ -1,24 +1,25 @@
 #include "../includes/ft_printf.h"
 
-int get_arg_len(const char *str)
+int	get_arg_len(const char *str)
 {
-	char *flags = "cspdiuxX";
-	int len;
+	char	*flags;
+	int		len;
 
 	len = 1;
 	str++;
+	flags = "cspdiuxX";
 	while (*str && (*str > 13 || *str < 9) && *str != ' '
 		   && ft_memchr(flags, *(str - 1), 8) == 0)
 	{
 		len++;
 		str++;
 		if (*(str - 1) == '%')
-			break;
+			break ;
 	}
 	return (len);
 }
 
-int flag_is_upper_hex(const char *arg_str)
+int	flag_is_upper_hex(const char *arg_str)
 {
 	while (*arg_str)
 	{
@@ -29,7 +30,7 @@ int flag_is_upper_hex(const char *arg_str)
 	return (NO);
 }
 
-int get_unsigned_num_len(unsigned int num)
+int	get_unsigned_num_len(unsigned int num)
 {
 	int	len;
 
@@ -43,7 +44,7 @@ int get_unsigned_num_len(unsigned int num)
 	return (len);
 }
 
-int get_num_before_dot(const char *arg_str)
+int	get_num_before_dot(const char *arg_str)
 {
 	while (*arg_str && *arg_str != '.')
 	{
@@ -56,7 +57,7 @@ int get_num_before_dot(const char *arg_str)
 	return (0);
 }
 
-int get_num_after_dot(const char *arg_str)
+int	get_num_after_dot(const char *arg_str)
 {
 	while (arg_str && *arg_str != '.')
 		arg_str++;

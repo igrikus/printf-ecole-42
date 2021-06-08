@@ -112,8 +112,8 @@ int	ft_printf(const char *str, ...)
 			str += get_arg_len(str);
 		}
 	}
-	end_args_and_free_list(args);
 	result = get_result_line(result, size);
+	end_args_and_free_list(args);
 	if (result == 0)
 		return (-1);
 	return (print_all_shit(size, result));

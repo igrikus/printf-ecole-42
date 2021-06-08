@@ -1,14 +1,14 @@
 #include "../includes/ft_printf.h"
 
-void end_args_and_free_list(va_list args)
+void	end_args_and_free_list(va_list args)
 {
 	va_end(args);
 	ft_lstclear(&g_list_args, free_content);
 }
 
-static void get_result_str(t_sides sides, char *result)
+static void	get_result_str(t_sides sides, char *result)
 {
-	size_t count;
+	size_t	count;
 
 	count = 0;
 	while (count++ < sides.left)
@@ -23,11 +23,11 @@ static void get_result_str(t_sides sides, char *result)
 	*result = 0;
 }
 
-static char *str_from_arg(t_parameter parameter)
+static char	*str_from_arg(t_parameter parameter)
 {
-	t_sides sides;
-	char *result;
-	size_t max_len;
+	t_sides	sides;
+	char	*result;
+	size_t	max_len;
 
 	if (parameter.num_before_dot)
 		max_len = parameter.num_before_dot;
@@ -48,12 +48,12 @@ static char *str_from_arg(t_parameter parameter)
 	return (result);
 }
 
-size_t parse_percent(const char *str, va_list args)
+size_t	parse_percent(const char *str, va_list args)
 {
-	t_list *last;
-	t_parameter parameter;
-	char	*result;
-	char	*arg_str;
+	t_list		*last;
+	t_parameter	parameter;
+	char		*result;
+	char		*arg_str;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)

@@ -2,7 +2,7 @@
 
 static char	*get_hex_from_decimal(unsigned long nbr, char *base, char *result)
 {
-	unsigned long modulo;
+	unsigned long	modulo;
 
 	if (nbr != 0 && (nbr / 16 != 0))
 		result = get_hex_from_decimal(nbr / 16, base, result);
@@ -11,10 +11,10 @@ static char	*get_hex_from_decimal(unsigned long nbr, char *base, char *result)
 	return (result + 1);
 }
 
-static char *fill_hex_pointer(char *arg_str, unsigned long number,
+static char	*fill_hex_pointer(char *arg_str, unsigned long number,
 							  size_t hex_len)
 {
-	char *hex_str;
+	char	*hex_str;
 
 	hex_str = get_malloc_result(hex_len);
 	if (hex_str == 0)
@@ -31,11 +31,11 @@ static char *fill_hex_pointer(char *arg_str, unsigned long number,
 	return (hex_str - 2);
 }
 
-static int get_result_str(t_sides side, char *arg_str,
+static int	get_result_str(t_sides side, char *arg_str,
 						   unsigned long number, char *result)
 {
-	char *hex_str;
-	size_t hex_len;
+	char	*hex_str;
+	size_t	hex_len;
 
 	hex_len = get_hex_len(number) + 2;
 	hex_str = fill_hex_pointer(arg_str, number, hex_len);
@@ -54,12 +54,12 @@ static int get_result_str(t_sides side, char *arg_str,
 	return (0);
 }
 
-static char *str_from_arg(t_parameter parameter, unsigned long number,
+static char	*str_from_arg(t_parameter parameter, unsigned long number,
 						  size_t num_len, char *arg_str)
 {
-	t_sides sides;
-	char *result;
-	size_t max_len;
+	t_sides	sides;
+	char	*result;
+	size_t	max_len;
 
 	if ((int)num_len >= parameter.num_before_dot
 		&& (int)num_len >= parameter.num_after_dot)
@@ -79,13 +79,13 @@ static char *str_from_arg(t_parameter parameter, unsigned long number,
 	return (0);
 }
 
-size_t parse_pointer(const char *str, va_list args)
+size_t	parse_pointer(const char *str, va_list args)
 {
-	t_parameter parameter;
-	char *result;
-	char *arg_str;
-	unsigned long number;
-	size_t num_len;
+	t_parameter		parameter;
+	char			*result;
+	char			*arg_str;
+	unsigned long	number;
+	size_t			num_len;
 
 	arg_str = ft_substr(str, 0, get_arg_len(str));
 	if (arg_str == 0)
